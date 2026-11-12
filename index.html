@@ -1,0 +1,4371 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover"
+    />
+    <title>¡Feliz Cumpleaños 10 Axxel Jhael!</title>
+    <meta
+      name="description"
+      content="Tarjeta interactiva de cumpleaños, juego de explotar globos, fotos y música festiva para los 10 años de Axxel Jhael."
+    />
+
+    <!-- PWA & Mobile Web App Meta Tags -->
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#8b5cf6" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Axxel 10" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <link rel="icon" type="image/svg+xml" href="icon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="pwa-192x192.png" />
+
+    <!-- Google Fonts: Fredoka & Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700;800&family=Nunito:wght@400;600;700;800;900&family=Bungee&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ==========================================================================
+       CSS STYLES - TARJETA & JUEGO PWA PARA AXXEL JHAEL (10 AÑOS)
+       ========================================================================== */
+      :root {
+        --bg-dark: #0a0b16;
+        --card-bg: #13122a;
+        --primary-pink: #ff2a85;
+        --primary-purple: #8b5cf6;
+        --primary-yellow: #facc15;
+        --primary-cyan: #06b6d4;
+        --primary-lime: #10b981;
+        --text-main: #ffffff;
+        --text-muted: #cbd5e1;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        -webkit-tap-highlight-color: transparent;
+        user-select: none;
+      }
+
+      body {
+        font-family:
+          "Nunito",
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+        background-color: var(--bg-dark);
+        color: var(--text-main);
+        min-height: 100vh;
+        overflow-x: hidden;
+        position: relative;
+        touch-action: manipulation;
+      }
+
+      .font-fredoka {
+        font-family: "Fredoka", cursive, sans-serif;
+      }
+      .font-bungee {
+        font-family: "Bungee", cursive, sans-serif;
+      }
+
+      /* Ambient Festive Lights */
+      .ambient-glow {
+        position: fixed;
+        width: 380px;
+        height: 380px;
+        border-radius: 50%;
+        filter: blur(100px);
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.35;
+        animation: pulse-glow 7s infinite alternate ease-in-out;
+      }
+      .glow-1 {
+        top: -80px;
+        left: -80px;
+        background: #ec4899;
+      }
+      .glow-2 {
+        top: 40%;
+        right: -100px;
+        background: #06b6d4;
+        animation-delay: 2s;
+      }
+      .glow-3 {
+        bottom: -80px;
+        left: 30%;
+        background: #8b5cf6;
+        animation-delay: 4s;
+      }
+
+      @keyframes pulse-glow {
+        0% {
+          transform: scale(0.9);
+          opacity: 0.25;
+        }
+        100% {
+          transform: scale(1.15);
+          opacity: 0.45;
+        }
+      }
+
+      /* Confetti Canvas */
+      #confetti-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 999;
+      }
+
+      .app-container {
+        max-width: 900px;
+        margin: 0 auto;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        z-index: 10;
+      }
+
+      /* Header */
+      header {
+        position: sticky;
+        top: 0;
+        background: rgba(10, 11, 22, 0.9);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid rgba(139, 92, 246, 0.25);
+        padding: 10px 14px;
+        z-index: 50;
+      }
+
+      .header-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .brand-wrap {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+      }
+
+      .badge-10 {
+        width: 44px;
+        height: 44px;
+        background: linear-gradient(135deg, #f59e0b, #ec4899, #8b5cf6);
+        border-radius: 14px;
+        padding: 2px;
+        box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .badge-10-inner {
+        width: 100%;
+        height: 100%;
+        background: #0a0b16;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Bungee", cursive;
+        font-size: 18px;
+        color: #facc15;
+      }
+
+      .brand-titles h1 {
+        font-family: "Fredoka", cursive;
+        font-size: 17px;
+        font-weight: 800;
+        color: #facc15;
+        line-height: 1.1;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .brand-titles .tag-decade {
+        font-size: 10px;
+        background: rgba(236, 72, 153, 0.25);
+        color: #f472b6;
+        border: 1px solid rgba(244, 114, 182, 0.4);
+        padding: 1px 6px;
+        border-radius: 20px;
+      }
+
+      .brand-titles p {
+        font-size: 11px;
+        color: #a5b4fc;
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .btn-header {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: #ffffff;
+        padding: 7px 11px;
+        border-radius: 30px;
+        font-family: "Fredoka", cursive;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        transition: all 0.2s ease;
+      }
+      .btn-header:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.04);
+      }
+      .btn-header:active {
+        transform: scale(0.96);
+      }
+
+      .btn-music-playing {
+        background: linear-gradient(135deg, #ec4899, #8b5cf6);
+        border-color: rgba(244, 114, 182, 0.6);
+        color: white;
+        box-shadow: 0 0 15px rgba(236, 72, 153, 0.5);
+      }
+
+      .btn-install {
+        background: linear-gradient(135deg, #10b981, #06b6d4);
+        border-color: rgba(16, 185, 129, 0.5);
+        color: white;
+      }
+
+      /* Equalizer Bars */
+      .eq-wrap {
+        display: inline-flex;
+        align-items: flex-end;
+        gap: 2px;
+        height: 12px;
+      }
+      .eq-bar {
+        width: 2px;
+        background: #facc15;
+        border-radius: 2px;
+        animation: eq-bounce 0.8s infinite ease-in-out alternate;
+      }
+      .eq-bar:nth-child(1) {
+        height: 6px;
+        animation-delay: 0.1s;
+      }
+      .eq-bar:nth-child(2) {
+        height: 12px;
+        animation-delay: 0.3s;
+      }
+      .eq-bar:nth-child(3) {
+        height: 8px;
+        animation-delay: 0.2s;
+      }
+
+      @keyframes eq-bounce {
+        0% {
+          height: 3px;
+        }
+        100% {
+          height: 12px;
+        }
+      }
+
+      /* Navigation Tabs */
+      nav.nav-tabs {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 10px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .tab-btn {
+        flex: 1;
+        padding: 8px 4px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: #cbd5e1;
+        font-family: "Fredoka", cursive;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        transition: all 0.25s ease;
+      }
+      .tab-btn:hover {
+        background: rgba(255, 255, 255, 0.12);
+        color: white;
+      }
+
+      .tab-btn.active-card {
+        background: linear-gradient(135deg, #ff2a85, #e11d48);
+        color: white;
+        border-color: rgba(255, 255, 255, 0.4);
+        box-shadow: 0 4px 15px rgba(255, 42, 133, 0.4);
+      }
+      .tab-btn.active-game {
+        background: linear-gradient(135deg, #f59e0b, #eab308);
+        color: #0f172a;
+        border-color: #fef08a;
+        box-shadow: 0 4px 15px rgba(234, 179, 8, 0.4);
+      }
+      .tab-btn.active-cake {
+        background: linear-gradient(135deg, #8b5cf6, #6366f1);
+        color: white;
+        border-color: rgba(255, 255, 255, 0.4);
+        box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+      }
+      .tab-btn.active-photos {
+        background: linear-gradient(135deg, #06b6d4, #0d9488);
+        color: white;
+        border-color: rgba(255, 255, 255, 0.4);
+        box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4);
+      }
+
+      /* Main Content */
+      main {
+        flex: 1;
+        padding: 16px 14px 40px;
+      }
+
+      .tab-panel {
+        display: none;
+        animation: fadeIn 0.35s ease forwards;
+      }
+      .tab-panel.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ==========================================================================
+       TAB 1: TARJETA DE FELICITACIÓN
+       ========================================================================== */
+      .card-hero-banner {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .pill-decade {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 14px;
+        background: rgba(244, 114, 182, 0.15);
+        border: 1px solid rgba(244, 114, 182, 0.35);
+        border-radius: 30px;
+        font-size: 12px;
+        font-weight: 800;
+        color: #f472b6;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .title-axxel {
+        font-family: "Fredoka", cursive;
+        font-size: clamp(32px, 8vw, 54px);
+        font-weight: 800;
+        background: linear-gradient(135deg, #facc15, #f472b6, #38bdf8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-top: 6px;
+        line-height: 1.1;
+      }
+
+      .subtitle-10 {
+        font-family: "Fredoka", cursive;
+        font-size: clamp(16px, 4vw, 22px);
+        font-weight: 700;
+        color: #fde047;
+        margin-top: 4px;
+      }
+
+      .birthday-card-container {
+        max-width: 620px;
+        margin: 0 auto;
+        perspective: 1000px;
+      }
+
+      .birthday-card {
+        background: linear-gradient(135deg, #1e1b4b, #2e1065, #0f172a);
+        border: 3px solid #facc15;
+        border-radius: 28px;
+        padding: 24px 20px;
+        box-shadow:
+          0 10px 40px rgba(234, 179, 8, 0.25),
+          0 0 20px rgba(139, 92, 246, 0.3);
+        position: relative;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      .birthday-card:hover {
+        transform: scale(1.015);
+      }
+
+      .card-corner {
+        position: absolute;
+        font-size: 22px;
+        pointer-events: none;
+      }
+      .c-tl {
+        top: 12px;
+        left: 14px;
+      }
+      .c-tr {
+        top: 12px;
+        right: 14px;
+      }
+      .c-bl {
+        bottom: 12px;
+        left: 14px;
+      }
+      .c-br {
+        bottom: 12px;
+        right: 14px;
+      }
+
+      .card-closed-view {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 25px 10px;
+      }
+
+      .big-10-circle {
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #f59e0b, #fde047, #f59e0b);
+        padding: 5px;
+        box-shadow: 0 8px 30px rgba(245, 158, 11, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: float-gentle 3.5s infinite ease-in-out;
+        position: relative;
+        margin-bottom: 20px;
+      }
+
+      .big-10-inner {
+        width: 100%;
+        height: 100%;
+        background: #0f172a;
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #fde047;
+      }
+
+      .big-10-inner .num {
+        font-family: "Bungee", cursive;
+        font-size: 56px;
+        color: #facc15;
+        line-height: 0.9;
+      }
+      .big-10-inner .lbl {
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 2px;
+        color: white;
+      }
+
+      .crown-tag {
+        position: absolute;
+        top: -12px;
+        background: #facc15;
+        color: #0f172a;
+        font-family: "Fredoka", cursive;
+        font-weight: 800;
+        font-size: 11px;
+        padding: 3px 10px;
+        border-radius: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .card-closed-view h2 {
+        font-family: "Fredoka", cursive;
+        font-size: 26px;
+        color: #ffffff;
+        margin-bottom: 8px;
+      }
+
+      .card-closed-view p {
+        font-size: 14px;
+        color: #cbd5e1;
+        max-width: 400px;
+        margin-bottom: 20px;
+        line-height: 1.5;
+      }
+
+      .btn-open-card {
+        background: linear-gradient(135deg, #facc15, #f59e0b);
+        color: #0f172a;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 30px;
+        font-family: "Fredoka", cursive;
+        font-size: 15px;
+        font-weight: 800;
+        cursor: pointer;
+        box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
+        animation: bounce 1.8s infinite;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-7px);
+        }
+      }
+
+      .card-open-view {
+        display: none;
+        text-align: left;
+      }
+      .birthday-card.is-open .card-closed-view {
+        display: none;
+      }
+      .birthday-card.is-open .card-open-view {
+        display: block;
+      }
+
+      .open-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+        padding-bottom: 12px;
+        margin-bottom: 14px;
+      }
+      .open-header h3 {
+        font-family: "Fredoka", cursive;
+        font-size: 20px;
+        color: #facc15;
+      }
+      .open-header p {
+        font-size: 12px;
+        color: #c084fc;
+      }
+
+      .card-body-text {
+        font-size: 15px;
+        line-height: 1.65;
+        color: #f1f5f9;
+      }
+      .card-body-text p {
+        margin-bottom: 12px;
+      }
+
+      .quote-box {
+        background: rgba(139, 92, 246, 0.2);
+        border-left: 4px solid #facc15;
+        padding: 12px 14px;
+        border-radius: 0 16px 16px 0;
+        margin: 14px 0;
+        font-style: italic;
+        color: #fef08a;
+      }
+
+      .card-signature {
+        border-top: 1px solid rgba(139, 92, 246, 0.3);
+        padding-top: 12px;
+        margin-top: 16px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .sig-input {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        padding: 6px 10px;
+        color: #facc15;
+        font-family: "Fredoka", cursive;
+        font-weight: 700;
+        font-size: 13px;
+        width: 100%;
+        /*max-width: 320px;*/
+      }
+
+      .card-actions-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 16px;
+      }
+      .btn-action {
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 8px 14px;
+        border-radius: 14px;
+        font-family: "Fredoka", cursive;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.2s;
+      }
+      .btn-action:hover {
+        background: rgba(255, 255, 255, 0.22);
+        transform: scale(1.02);
+      }
+      .btn-action.btn-confetti {
+        background: #ec4899;
+        border-color: #f472b6;
+      }
+      .btn-action.btn-fanfare {
+        background: #f59e0b;
+        color: #0f172a;
+        border-color: #fde047;
+      }
+      .btn-action.btn-share {
+        background: #06b6d4;
+        border-color: #38bdf8;
+      }
+
+      .badges-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        max-width: 620px;
+        margin: 20px auto 0;
+      }
+      @media (min-width: 600px) {
+        .badges-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+      .badge-card {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 18px;
+        padding: 12px;
+        text-align: center;
+      }
+      .badge-card .b-icon {
+        font-size: 24px;
+        margin-bottom: 4px;
+      }
+      .badge-card h4 {
+        font-family: "Fredoka", cursive;
+        font-size: 12px;
+        font-weight: 700;
+        color: #38bdf8;
+      }
+      .badge-card p {
+        font-size: 11px;
+        color: #94a3b8;
+      }
+
+      /* ==========================================================================
+       TAB 2: JUEGO DE GLOBOS
+       ========================================================================== */
+      .game-header-bar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+
+      .game-modes {
+        display: inline-flex;
+        background: rgba(0, 0, 0, 0.4);
+        padding: 4px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .mode-btn {
+        background: transparent;
+        border: none;
+        color: #cbd5e1;
+        padding: 6px 12px;
+        border-radius: 12px;
+        font-family: "Fredoka", cursive;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .mode-btn.active {
+        background: linear-gradient(135deg, #ec4899, #8b5cf6);
+        color: white;
+      }
+
+      .scoreboard-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+      @media (min-width: 600px) {
+        .scoreboard-row {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+
+      .stat-pill {
+        background: linear-gradient(
+          135deg,
+          rgba(30, 27, 75, 0.8),
+          rgba(15, 23, 42, 0.9)
+        );
+        border: 1px solid rgba(139, 92, 246, 0.3);
+        border-radius: 18px;
+        padding: 10px 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .stat-pill .lbl {
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: #facc15;
+      }
+      .stat-pill .val {
+        font-family: "Bungee", cursive;
+        font-size: 24px;
+        color: white;
+        line-height: 1;
+      }
+
+      .balloon-stage {
+        position: relative;
+        width: 100%;
+        height: 480px;
+        background: linear-gradient(
+          180deg,
+          #090e29 0%,
+          #15103a 60%,
+          #0a0b16 100%
+        );
+        border: 3px solid rgba(139, 92, 246, 0.4);
+        border-radius: 28px;
+        overflow: hidden;
+        touch-action: none;
+      }
+
+      .stage-watermark {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: "Bungee", cursive;
+        font-size: clamp(120px, 25vw, 190px);
+        color: rgba(250, 204, 21, 0.05);
+        pointer-events: none;
+        line-height: 1;
+      }
+
+      .balloon-elem {
+        position: absolute;
+        cursor: pointer;
+        user-select: none;
+        transform-origin: center bottom;
+        transition: transform 0.05s ease;
+        z-index: 10;
+      }
+      .balloon-elem:active {
+        transform: scale(0.85);
+      }
+
+      .balloon-body {
+        width: 100%;
+        height: 100%;
+        border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+        position: relative;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .balloon-highlight {
+        position: absolute;
+        top: 10%;
+        left: 15%;
+        width: 25%;
+        height: 35%;
+        background: rgba(255, 255, 255, 0.45);
+        border-radius: 50%;
+        transform: rotate(-25deg);
+        pointer-events: none;
+      }
+
+      .balloon-knot {
+        position: absolute;
+        bottom: -6px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 10px;
+        height: 8px;
+        background: inherit;
+        border-radius: 0 0 4px 4px;
+        border-top: 1px solid rgba(0, 0, 0, 0.2);
+      }
+      .balloon-string {
+        position: absolute;
+        bottom: -28px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 2px;
+        height: 24px;
+        background: rgba(255, 255, 255, 0.4);
+        pointer-events: none;
+      }
+
+      .score-tag {
+        position: absolute;
+        font-family: "Bungee", cursive;
+        font-size: 18px;
+        pointer-events: none;
+        animation: floatUpFade 0.85s forwards ease-out;
+        z-index: 25;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+      }
+
+      @keyframes floatUpFade {
+        0% {
+          transform: translateY(0) scale(0.8);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-45px) scale(1.2);
+          opacity: 0;
+        }
+      }
+
+      /* Modal Congratulation */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        z-index: 999;
+      }
+
+      .modal-box {
+        background: linear-gradient(135deg, #2e1065, #1e1b4b, #0f172a);
+        border: 3px solid #facc15;
+        border-radius: 28px;
+        padding: 26px 20px;
+        max-width: 480px;
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 0 50px rgba(250, 204, 21, 0.4);
+        animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      @keyframes modalPop {
+        0% {
+          transform: scale(0.8);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .modal-box h3 {
+        font-family: "Fredoka", cursive;
+        font-size: 22px;
+        color: #facc15;
+        margin-bottom: 8px;
+      }
+      .modal-box p {
+        font-size: 14px;
+        color: #e2e8f0;
+        line-height: 1.5;
+        margin-bottom: 16px;
+      }
+
+      /* ==========================================================================
+       TAB 3: PASTEL INTERACTIVO 10 AÑOS
+       ========================================================================== */
+      .cake-container {
+        max-width: 520px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .candles-row {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        gap: clamp(3px, 1.4vw, 9px);
+        margin-bottom: 4px;
+        z-index: 20;
+        position: relative;
+        isolation: isolate;
+      }
+
+      .candle-unit {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        color: inherit;
+        font: inherit;
+        position: relative;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+        transition:
+          transform 0.22s ease,
+          filter 0.22s ease;
+        outline: none;
+      }
+      .candle-unit:hover,
+      .candle-unit:focus-visible {
+        transform: translateY(-4px) scale(1.06);
+      }
+      .candle-unit:focus-visible {
+        filter: drop-shadow(0 0 7px rgba(250, 204, 21, 0.8));
+      }
+
+      /* La llama está formada por varias capas para dar profundidad y movimiento */
+      .candle-flame {
+        width: 17px;
+        height: 29px;
+        position: relative;
+        margin-bottom: 2px;
+        transform-origin: 50% 100%;
+        border-radius: 52% 48% 48% 52% / 68% 68% 32% 32%;
+        background: radial-gradient(
+          ellipse at 50% 76%,
+          #fffef0 0 10%,
+          #fff4a3 23%,
+          #ffc247 48%,
+          #ff8a18 72%,
+          rgba(255, 91, 0, 0.05) 100%
+        );
+        filter: drop-shadow(0 0 3px rgba(255, 224, 130, 0.95));
+        box-shadow:
+          0 0 12px 4px rgba(255, 177, 45, 0.48),
+          0 0 27px 9px rgba(255, 119, 24, 0.22);
+        animation: flameDance 0.72s ease-in-out infinite alternate;
+        will-change: transform, opacity;
+      }
+      .candle-flame::before {
+        content: "";
+        position: absolute;
+        left: 5px;
+        bottom: 2px;
+        width: 7px;
+        height: 17px;
+        border-radius: 50% 50% 45% 45% / 65% 65% 35% 35%;
+        background: linear-gradient(to top, #fff 0%, #fffde7 42%, #fff1a8 100%);
+        filter: blur(0.35px);
+        animation: innerFlame 0.48s ease-in-out infinite alternate;
+      }
+      .candle-flame::after {
+        content: "";
+        position: absolute;
+        left: 7px;
+        bottom: -3px;
+        width: 3px;
+        height: 8px;
+        border-radius: 50%;
+        background: #fff8d6;
+        filter: blur(1px);
+        opacity: 0.9;
+      }
+      @keyframes flameDance {
+        0% {
+          transform: rotate(-4deg) scale(0.94, 1.02);
+        }
+        35% {
+          transform: rotate(2deg) scale(1.04, 0.96);
+        }
+        70% {
+          transform: rotate(-1deg) scale(0.97, 1.08);
+        }
+        100% {
+          transform: rotate(4deg) scale(1.03, 0.98);
+        }
+      }
+      @keyframes innerFlame {
+        from {
+          transform: scale(0.88, 0.94) translateX(-0.5px);
+          opacity: 0.82;
+        }
+        to {
+          transform: scale(1.08, 1.05) translateX(0.5px);
+          opacity: 1;
+        }
+      }
+      .candle-unit:nth-child(3n) .candle-flame {
+        animation-duration: 0.59s;
+      }
+      .candle-unit:nth-child(2n) .candle-flame {
+        animation-delay: -0.25s;
+      }
+
+      .candle-glow {
+        position: absolute;
+        top: 2px;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 190, 75, 0.27),
+          rgba(255, 145, 35, 0.1) 45%,
+          transparent 72%
+        );
+        pointer-events: none;
+        animation: glowPulse 1.1s ease-in-out infinite alternate;
+      }
+      @keyframes glowPulse {
+        from {
+          opacity: 0.58;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1.12);
+        }
+      }
+
+      .candle-unit.is-blowing .candle-flame {
+        animation: flameOut 0.42s ease-in forwards;
+      }
+      @keyframes flameOut {
+        0% {
+          transform: scale(1, 1) rotate(0);
+          opacity: 1;
+        }
+        35% {
+          transform: scale(1.2, 0.72) rotate(18deg);
+        }
+        65% {
+          transform: scale(0.7, 0.45) rotate(48deg);
+          opacity: 0.8;
+        }
+        100% {
+          transform: scale(0.05, 0.1) translate(10px, -4px);
+          opacity: 0;
+        }
+      }
+
+      .candle-unit.is-lighting .candle-flame {
+        animation:
+          flameIgnite 0.62s cubic-bezier(0.2, 0.8, 0.2, 1) both,
+          flameDance 0.72s 0.62s ease-in-out infinite alternate;
+      }
+      @keyframes flameIgnite {
+        0% {
+          transform: scale(0.05, 0.08);
+          opacity: 0;
+          filter: brightness(2);
+        }
+        45% {
+          transform: scale(1.35, 0.75);
+          opacity: 1;
+        }
+        70% {
+          transform: scale(0.82, 1.18);
+        }
+        100% {
+          transform: scale(1, 1);
+          opacity: 1;
+        }
+      }
+
+      .candle-unit.is-off .candle-flame,
+      .candle-unit.is-off .candle-glow {
+        display: none;
+      }
+
+      .candle-smoke {
+        display: none;
+        position: relative;
+        width: 18px;
+        height: 29px;
+        margin-bottom: 2px;
+        color: transparent;
+        font-size: 0;
+      }
+      .candle-smoke::before,
+      .candle-smoke::after {
+        content: "";
+        position: absolute;
+        left: 7px;
+        bottom: 1px;
+        width: 7px;
+        height: 13px;
+        border-radius: 50%;
+        border-left: 2px solid rgba(203, 213, 225, 0.68);
+        filter: blur(1px);
+        animation: smokeRise 1.5s ease-out infinite;
+      }
+      .candle-smoke::after {
+        left: 10px;
+        bottom: 7px;
+        width: 9px;
+        height: 11px;
+        animation-delay: 0.45s;
+        opacity: 0.55;
+      }
+      .candle-unit.is-off .candle-smoke {
+        display: block;
+      }
+      @keyframes smokeRise {
+        0% {
+          transform: translate(0, 5px) scale(0.55) rotate(-12deg);
+          opacity: 0;
+        }
+        25% {
+          opacity: 0.65;
+        }
+        100% {
+          transform: translate(5px, -22px) scale(1.5) rotate(18deg);
+          opacity: 0;
+        }
+      }
+
+      .candle-stick {
+        width: 13px;
+        height: 60px;
+        position: relative;
+        overflow: visible;
+        border-radius: 4px 4px 2px 2px;
+        background: repeating-linear-gradient(
+          45deg,
+          #ff2a85,
+          #ff2a85 8px,
+          #ffffff 8px,
+          #ffffff 16px
+        );
+        box-shadow:
+          inset -3px 0 4px rgba(0, 0, 0, 0.16),
+          inset 2px 0 3px rgba(255, 255, 255, 0.55),
+          0 4px 8px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(0, 0, 0, 0.15);
+      }
+      .candle-stick::before {
+        content: "";
+        position: absolute;
+        top: -3px;
+        left: 4px;
+        width: 3px;
+        height: 7px;
+        border-radius: 2px;
+        background: #292524;
+        box-shadow: 0 0 1px #111;
+      }
+      .candle-unit:nth-child(even) .candle-stick {
+        background: repeating-linear-gradient(
+          45deg,
+          #06b6d4,
+          #06b6d4 8px,
+          #ffffff 8px,
+          #ffffff 16px
+        );
+      }
+      .candle-unit.is-off .candle-stick::before {
+        background: #51443c;
+      }
+
+      .candle-num {
+        font-size: 10px;
+        font-weight: 800;
+        color: #facc15;
+        margin-top: 3px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .candle-flame,
+        .candle-flame::before,
+        .candle-glow,
+        .candle-smoke::before,
+        .candle-smoke::after {
+          animation-duration: 2.5s !important;
+        }
+      }
+
+      .cake-tier-1 {
+        width: 280px;
+        height: 70px;
+        background: linear-gradient(180deg, #f472b6 0%, #db2777 100%);
+        border: 3px solid #fef08a;
+        border-radius: 24px 24px 0 0;
+        margin: 0 auto;
+        box-shadow: 0 8px 25px rgba(219, 39, 119, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Fredoka", cursive;
+        font-weight: 800;
+        font-size: 16px;
+        color: white;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        position: relative;
+        z-index: 10;
+      }
+
+      .cake-tier-2 {
+        width: 360px;
+        height: 85px;
+        background: linear-gradient(180deg, #78350f 0%, #451a03 100%);
+        border: 3px solid #fef08a;
+        margin: 0 auto;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .cake-badge-10 {
+        width: 58px;
+        height: 58px;
+        background: linear-gradient(135deg, #facc15, #f59e0b);
+        border-radius: 50%;
+        padding: 2px;
+        box-shadow: 0 4px 15px rgba(245, 158, 11, 0.5);
+        border: 2px solid white;
+      }
+      .cake-badge-10-inner {
+        width: 100%;
+        height: 100%;
+        background: #0f172a;
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: "Bungee", cursive;
+        font-size: 19px;
+        color: #facc15;
+        line-height: 1;
+      }
+      .cake-badge-10-inner span {
+        font-size: 7px;
+        color: white;
+      }
+
+      .cake-base-plate {
+        width: 400px;
+        height: 18px;
+        background: linear-gradient(90deg, #e2e8f0, #ffffff, #cbd5e1);
+        border: 2px solid #facc15;
+        border-radius: 30px;
+        margin: 0 auto;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+      }
+
+      /* ==========================================================================
+       TAB 4: ÁLBUM DE FOTOS & RECUERDOS (CARPETA fotos/)
+       ========================================================================== */
+      .photo-upload-bar {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(139, 92, 246, 0.3);
+        border-radius: 20px;
+        padding: 16px;
+        margin-bottom: 24px;
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      @media (min-width: 560px) {
+        .gallery-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (min-width: 820px) {
+        .gallery-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .polaroid-card {
+        background: #ffffff;
+        padding: 12px 12px 18px;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        color: #0f172a;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.3s;
+      }
+      .polaroid-card:hover {
+        transform: translateY(-6px) rotate(1deg);
+      }
+
+      .tape-sticker {
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%) rotate(-2deg);
+        background: rgba(254, 240, 138, 0.85);
+        border: 1px solid rgba(250, 204, 21, 0.5);
+        width: 70px;
+        height: 20px;
+        border-radius: 2px;
+      }
+
+      .polaroid-img-wrap {
+        width: 100%;
+        height: 210px;
+        border-radius: 10px;
+        overflow: hidden;
+        background: #f1f5f9;
+        position: relative;
+      }
+      .polaroid-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s;
+      }
+      .polaroid-card:hover img {
+        transform: scale(1.05);
+      }
+
+      .polaroid-sticker-badge {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        background: linear-gradient(135deg, #ec4899, #8b5cf6);
+        color: white;
+        font-family: "Fredoka", cursive;
+        font-size: 10px;
+        font-weight: 800;
+        padding: 3px 8px;
+        border-radius: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      .polaroid-caption {
+        font-family: "Fredoka", cursive;
+        font-size: 14px;
+        font-weight: 700;
+        color: #1e293b;
+        margin-top: 10px;
+        line-height: 1.3;
+      }
+
+      .polaroid-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 8px;
+        font-size: 11px;
+        color: #64748b;
+        border-top: 1px solid #f1f5f9;
+        padding-top: 6px;
+      }
+
+      footer {
+        border-top: 1px solid rgba(139, 92, 246, 0.2);
+        padding: 20px 14px;
+        text-align: center;
+        font-size: 13px;
+        color: #94a3b8;
+      }
+
+      @keyframes float-gentle {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+
+      /* ==========================================================================
+       AJUSTES RESPONSIVE Y DE ACCESIBILIDAD
+       Se mantienen intactos los estilos y comportamientos originales.
+       ========================================================================== */
+      html {
+        width: 100%;
+        min-width: 0;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+      }
+
+      body {
+        width: 100%;
+        min-width: 0;
+        overflow-x: clip;
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+      }
+
+      img,
+      video,
+      canvas,
+      iframe {
+        max-width: 100%;
+      }
+
+      button,
+      input,
+      select,
+      textarea {
+        max-width: 100%;
+        font: inherit;
+      }
+
+      button {
+        touch-action: manipulation;
+      }
+
+      .app-container {
+        width: 100%;
+        max-width: 900px;
+        min-width: 0;
+      }
+
+      header {
+        padding-left: max(12px, env(safe-area-inset-left));
+        padding-right: max(12px, env(safe-area-inset-right));
+      }
+
+      .header-top,
+      .header-actions,
+      .brand-wrap,
+      nav.nav-tabs,
+      .game-header-bar,
+      .card-actions-row,
+      .photo-upload-bar,
+      .modal-box {
+        min-width: 0;
+      }
+
+      .brand-titles,
+      .brand-titles h1 {
+        min-width: 0;
+        flex-wrap: wrap;
+      }
+
+      main {
+        min-width: 0;
+        padding-left: clamp(10px, 2.5vw, 20px);
+        padding-right: clamp(10px, 2.5vw, 20px);
+      }
+
+      .birthday-card-container,
+      .birthday-card,
+      .cake-container,
+      .balloon-stage,
+      .gallery-grid {
+        min-width: 0;
+        max-width: 100%;
+      }
+
+      .birthday-card {
+        overflow-wrap: anywhere;
+      }
+
+      .cake-tier-1 {
+        width: min(280px, 78vw);
+      }
+      .cake-tier-2 {
+        width: min(360px, 92vw);
+      }
+      .cake-base-plate {
+        width: min(400px, 98vw);
+      }
+
+      .candles-row {
+        gap: clamp(2px, 1.5vw, 8px);
+        max-width: 100%;
+      }
+
+      .balloon-stage {
+        height: clamp(340px, 62vh, 480px);
+        min-height: 340px;
+      }
+
+      .modal-overlay {
+        overflow-y: auto;
+        align-items: center;
+        padding: max(12px, env(safe-area-inset-top))
+          max(12px, env(safe-area-inset-right))
+          max(12px, env(safe-area-inset-bottom))
+          max(12px, env(safe-area-inset-left));
+      }
+
+      .modal-box {
+        max-height: calc(100dvh - 24px);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+      }
+
+      .polaroid-card,
+      .polaroid-img-wrap {
+        min-width: 0;
+      }
+
+      .polaroid-img-wrap {
+        height: clamp(170px, 35vw, 230px);
+      }
+
+      @media (max-width: 700px) {
+        header {
+          position: relative;
+          padding-top: max(9px, env(safe-area-inset-top));
+        }
+
+        .header-top {
+          align-items: flex-start;
+          flex-wrap: wrap;
+        }
+
+        .brand-wrap {
+          flex: 1 1 190px;
+        }
+
+        .header-actions {
+          flex: 1 1 100%;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+
+        .btn-header {
+          min-height: 36px;
+          padding: 7px 10px;
+          font-size: 11px;
+        }
+
+        nav.nav-tabs {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          width: 100%;
+          max-width: none;
+          gap: 6px;
+          margin-top: 9px;
+        }
+
+        .tab-btn {
+          min-width: 0;
+          min-height: 42px;
+          padding: 8px 3px;
+          border-radius: 12px;
+          font-size: clamp(10px, 2.8vw, 13px);
+          gap: 3px;
+          white-space: normal;
+        }
+
+        .card-hero-banner {
+          margin-bottom: 15px;
+        }
+        .title-axxel {
+          font-size: clamp(30px, 9vw, 46px);
+        }
+        .birthday-card {
+          border-radius: 22px;
+          padding: 18px 14px;
+        }
+        .card-closed-view {
+          padding: 20px 5px;
+        }
+        .card-closed-view h2 {
+          font-size: clamp(20px, 5.5vw, 26px);
+        }
+        .card-body-text {
+          font-size: 14px;
+        }
+        .open-header {
+          align-items: center;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+        .open-header h3 {
+          font-size: 18px;
+          margin-bottom: 6px;
+        }
+        .card-signature {
+          align-items: stretch;
+        }
+        .sig-input {
+          max-width: 100%;
+        }
+        .card-actions-row > button {
+          flex: 1 1 100%;
+          justify-content: center;
+        }
+
+        .game-header-bar {
+          align-items: stretch;
+        }
+        .game-modes {
+          width: 100%;
+        }
+        .mode-btn {
+          flex: 1;
+          padding: 8px 5px;
+        }
+        .stat-pill {
+          padding: 9px 10px;
+        }
+        .stat-pill .val {
+          font-size: clamp(17px, 5vw, 23px);
+        }
+        .balloon-stage {
+          border-radius: 20px;
+        }
+
+        .cake-container h3 {
+          font-size: clamp(22px, 6vw, 28px) !important;
+        }
+        .cake-tier-1 {
+          font-size: clamp(12px, 3.5vw, 16px);
+        }
+        .cake-base-plate {
+          height: 14px;
+        }
+        #btn-blow-all,
+        #btn-relight {
+          font-size: 13px;
+          padding: 10px 14px;
+        }
+        #tab-cake > .cake-container > div:last-child {
+          flex-wrap: wrap;
+        }
+
+        .gallery-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 12px;
+        }
+        .polaroid-card {
+          padding: 8px 8px 13px;
+        }
+        .polaroid-img-wrap {
+          height: clamp(125px, 34vw, 190px);
+        }
+        .polaroid-caption {
+          font-size: 12px;
+        }
+        .polaroid-meta {
+          font-size: 10px;
+          flex-wrap: wrap;
+          gap: 4px;
+        }
+
+        footer {
+          padding-bottom: max(20px, env(safe-area-inset-bottom));
+        }
+      }
+
+      @media (max-width: 390px) {
+        .badge-10 {
+          width: 38px;
+          height: 38px;
+          border-radius: 12px;
+        }
+        .badge-10-inner {
+          font-size: 16px;
+        }
+        .brand-titles h1 {
+          font-size: 15px;
+        }
+        .brand-titles .tag-decade {
+          font-size: 9px;
+        }
+        .brand-titles p {
+          font-size: 10px;
+        }
+        .header-actions {
+          gap: 5px;
+        }
+        .header-actions .btn-header {
+          flex: 1 1 auto;
+          justify-content: center;
+        }
+        nav.nav-tabs {
+          gap: 4px;
+        }
+        .tab-btn {
+          font-size: 10px;
+        }
+        .scoreboard-row {
+          gap: 6px;
+        }
+        .stat-pill {
+          border-radius: 13px;
+          padding: 8px;
+        }
+        .stat-pill .lbl {
+          font-size: 9px;
+        }
+        .stat-pill .val {
+          font-size: 17px;
+        }
+        .cake-tier-1 {
+          width: 76vw;
+        }
+        .cake-tier-2 {
+          width: 90vw;
+        }
+        .cake-base-plate {
+          width: 96vw;
+        }
+        .candles-row {
+          gap: 1px;
+        }
+        .candle-stick {
+          width: 10px;
+          height: 48px;
+        }
+        .candle-flame {
+          width: 11px;
+          height: 19px;
+        }
+        .candle-num {
+          font-size: 8px;
+        }
+        .gallery-grid {
+          gap: 9px;
+        }
+        .polaroid-img-wrap {
+          height: 125px;
+        }
+      }
+
+      @media (max-width: 340px) {
+        .brand-wrap {
+          flex-basis: 100%;
+        }
+        .header-actions .btn-header {
+          font-size: 10px;
+          padding: 6px 7px;
+        }
+        .tab-btn {
+          letter-spacing: -0.2px;
+        }
+        .gallery-grid {
+          grid-template-columns: 1fr;
+        }
+        .polaroid-img-wrap {
+          height: 210px;
+        }
+      }
+
+      @media (min-width: 701px) {
+        .header-actions {
+          flex-wrap: nowrap;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Background Ambiance -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="ambient-glow glow-3"></div>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Real Background Audio Player referencing musica/ folder -->
+    <audio id="bg-audio-player" loop preload="auto">
+      <source src="musica/cumpleanos_feliz.mp3" type="audio/mpeg" />
+    </audio>
+
+    <div class="app-container">
+      <!-- Header -->
+      <header>
+        <div class="header-top">
+          <div class="brand-wrap" onclick="switchTab('card')">
+            <div class="badge-10">
+              <div class="badge-10-inner">10</div>
+            </div>
+            <div class="brand-titles">
+              <h1>AXXEL JHAEL <span class="tag-decade">10 AÑOS</span></h1>
+              <p>¡Gran Fiesta de Cumpleaños!</p>
+            </div>
+          </div>
+
+          <div class="header-actions">
+            <!-- Music Toggle -->
+            <button
+              id="btn-music"
+              class="btn-header"
+              onclick="toggleFestiveMusic()"
+            >
+              <span>🎵</span>
+              <span id="music-text">Música</span>
+              <div id="eq-indicator" class="eq-wrap" style="display: none">
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
+              </div>
+            </button>
+
+            <!-- Audio FX Mute -->
+            <button
+              id="btn-sound"
+              class="btn-header"
+              onclick="toggleMuteAudio()"
+              title="Silenciar / Activar sonido"
+            >
+              <span id="sound-icon">🔊</span>
+            </button>
+
+            <!-- Install PWA -->
+            <button
+              id="btn-pwa-install"
+              class="btn-header btn-install"
+              onclick="triggerPWAInstall()"
+              style="display: none"
+            >
+              <span>📲 Instalar</span>
+            </button>
+
+            <!-- Structure & Files Modal -->
+            <button
+              class="btn-header"
+              onclick="openFolderStructureModal()"
+              title="Ver estructura de carpetas de la PWA"
+            >
+              <span>📁 Carpeta PWA</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="nav-tabs">
+          <button
+            id="tab-nav-card"
+            class="tab-btn active-card"
+            onclick="switchTab('card')"
+          >
+            <span>🎈</span> Tarjeta
+          </button>
+          <button id="tab-nav-game" class="tab-btn" onclick="switchTab('game')">
+            <span>🎯</span> Globos
+          </button>
+          <button id="tab-nav-cake" class="tab-btn" onclick="switchTab('cake')">
+            <span>🎂</span> Pastel 10
+          </button>
+          <button
+            id="tab-nav-photos"
+            class="tab-btn"
+            onclick="switchTab('photos')"
+          >
+            <span>📸</span> Fotos
+          </button>
+        </nav>
+      </header>
+
+      <!-- Main Content Area -->
+      <main>
+        <!-- ==========================================
+           TAB 1: TARJETA DE FELICITACIÓN
+           ========================================== -->
+        <section id="tab-card" class="tab-panel active">
+          <div class="card-hero-banner">
+            <div class="pill-decade">
+              ✨ Celebración de su Primera Década ✨
+            </div>
+            <h2 class="title-axxel">¡AXXEL JHAEL!</h2>
+            <p class="subtitle-10">🎂 Cumple sus 10 Años de Pura Alegría 🎈</p>
+          </div>
+
+          <!-- 3D Interactive Card -->
+          <div class="birthday-card-container">
+            <div
+              id="interactive-card"
+              class="birthday-card"
+              onclick="toggleCard()"
+            >
+              <span class="card-corner c-tl">✨</span>
+              <span class="card-corner c-tr">✨</span>
+              <span class="card-corner c-bl">🎉</span>
+              <span class="card-corner c-br">🎈</span>
+
+              <!-- Front (Closed) -->
+              <div class="card-closed-view">
+                <div class="big-10-circle">
+                  <div class="crown-tag">👑 CAMPEÓN</div>
+                  <div class="big-10-inner">
+                    <span class="num">10</span>
+                    <span class="lbl">AÑOS</span>
+                  </div>
+                </div>
+                <h2>¡Tienes una Tarjeta Especial!</h2>
+                <p>
+                  Toca aquí para abrir tu tarjeta mágica de cumpleaños y leer la
+                  dedicatoria de tus abuelitos y tu familia.
+                </p>
+                <button class="btn-open-card" type="button">
+                  <span>🎁</span> ¡TOCA PARA ABRIR LA TARJETA!
+                </button>
+              </div>
+
+              <!-- Inside (Open) -->
+              <div class="card-open-view">
+                <div class="open-header">
+                  <div>
+                    <h3>¡Felices 10 Años, Axxel Jhael!</h3>
+                    <p>Hoy entras a los dos dígitos de pura felicidad</p>
+                  </div>
+                  <button
+                    class="btn-action btn-confetti"
+                    type="button"
+                    onclick="
+                      event.stopPropagation();
+                      launchConfettiBurst();
+                    "
+                  >
+                    <span>🎉</span> ¡Más Confeti!
+                  </button>
+                </div>
+
+                <div class="card-body-text">
+                  <p>
+                    ¡Hoy es un día sumamente feliz y emocionante! Cumplir
+                    <strong>10 años</strong> es un momento único y especial:
+                    dejas atrás los 9 para comenzar tu primera década llena de
+                    nuevas aventuras, grandes sueños, risas y aprendizajes.
+                  </p>
+
+                  <div class="quote-box">
+                    «Axxel Jhael, eres un niño maravilloso, alegre, talentoso y
+                    con un corazón de oro. Que sigas iluminando nuestro hogar
+                    con tu energía, tu sonrisa y tus ganas de conquistar el
+                    mundo.»
+                  </div>
+
+                  <p>
+                    Deseamos que este nuevo año de vida venga cargado de tus
+                    juegos preferidos, canastas espectaculares, diversión con
+                    tus amigos, momentos inolvidables en familia y que cada uno
+                    de tus deseos se haga realidad.
+                  </p>
+                </div>
+
+                <div class="card-signature">
+                  <div style="flex: 1">
+                    <span
+                      style="
+                        font-size: 11px;
+                        color: #a5b4fc;
+                        text-transform: uppercase;
+                        font-weight: 800;
+                        display: block;
+                        margin-bottom: 4px;
+                      "
+                    >
+                      Con todo nuestro amor y bendiciones:
+                    </span>
+                    <input
+                      id="sig-input"
+                      class="sig-input"
+                      type="text"
+                      value="Tus abuelitos y toda tu familia que te ama"
+                      onclick="event.stopPropagation()"
+                      title="Puedes editar la firma de la tarjeta"
+                    />
+                  </div>
+                  <div
+                    style="
+                      font-family: &quot;Bungee&quot;, cursive;
+                      font-size: 28px;
+                      color: #f472b6;
+                      margin: inherit;
+                    "
+                  >
+                    #10
+                  </div>
+                </div>
+
+                <div class="card-actions-row">
+                  <button
+                    class="btn-action btn-share"
+                    type="button"
+                    onclick="
+                      event.stopPropagation();
+                      shareGreetingCard();
+                    "
+                  >
+                    <span>📲</span> Compartir Dedicatoria
+                  </button>
+                  <button
+                    class="btn-action btn-fanfare"
+                    type="button"
+                    onclick="
+                      event.stopPropagation();
+                      playFanfareSound();
+                    "
+                  >
+                    <span>🎺</span> Fanfarria de Triunfo
+                  </button>
+                  <span
+                    style="
+                      font-size: 11px;
+                      color: #94a3b8;
+                      display: block;
+                      width: 100%;
+                      margin-top: 6px;
+                      text-align-last: center;
+                    "
+                  >
+                    (Toca en cualquier parte de la tarjeta para cerrarla o
+                    volverla a abrir)
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 Badges -->
+          <div class="badges-grid">
+            <div class="badge-card">
+              <div class="b-icon">🎮</div>
+              <h4>NIVEL 10 PRO</h4>
+              <p>Desbloqueado hoy</p>
+            </div>
+            <div class="badge-card">
+              <div class="b-icon">🏀</div>
+              <h4>ESTRELLA DEL BALONCESTO</h4>
+              <p>Siempre imparable</p>
+            </div>
+            <div class="badge-card">
+              <div class="b-icon">🚀</div>
+              <h4>AVENTURERO</h4>
+              <p>Hasta las estrellas</p>
+            </div>
+            <div class="badge-card">
+              <div class="b-icon">❤️</div>
+              <h4>AMOR INFINITO</h4>
+              <p>De tus abuelitos</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+           TAB 2: JUEGO DE GLOBOS
+           ========================================== -->
+        <section id="tab-game" class="tab-panel">
+          <div class="game-header-bar">
+            <div>
+              <h3
+                style="
+                  font-family: &quot;Fredoka&quot;, cursive;
+                  font-size: 20px;
+                  color: #facc15;
+                  text-align-last: center;
+                "
+              >
+                🎈 ¡Juego de Globos de Axxel!
+              </h3>
+              <p style="font-size: 12px; color: #cbd5e1">
+                ¡Toca los globos para explotarlos, suma puntos y descubre
+                sorpresas!
+              </p>
+            </div>
+
+            <div class="game-modes">
+              <button
+                id="btn-mode-free"
+                class="mode-btn active"
+                onclick="setGameMode('free')"
+              >
+                Fiesta Libre
+              </button>
+              <button
+                id="btn-mode-challenge"
+                class="mode-btn"
+                onclick="setGameMode('challenge')"
+              >
+                Desafío 45s
+              </button>
+            </div>
+          </div>
+
+          <!-- Scoreboard -->
+          <div class="scoreboard-row">
+            <div class="stat-pill">
+              <div>
+                <span class="lbl">Puntos</span>
+                <div id="game-score" class="val">0</div>
+              </div>
+              <span style="font-size: 22px">⭐</span>
+            </div>
+            <div class="stat-pill">
+              <div>
+                <span class="lbl">Combo</span>
+                <div id="game-combo" class="val" style="color: #f472b6">x1</div>
+              </div>
+              <span style="font-size: 22px">🔥</span>
+            </div>
+            <div class="stat-pill">
+              <div id="stat-3-box">
+                <span id="stat-3-lbl" class="lbl">Explotados</span>
+                <div id="stat-3-val" class="val" style="color: #38bdf8">0</div>
+              </div>
+              <span id="stat-3-icon" style="font-size: 22px">💥</span>
+            </div>
+            <div class="stat-pill">
+              <div>
+                <span class="lbl">Récord</span>
+                <div id="game-highscore" class="val" style="color: #4ade80">
+                  0
+                </div>
+              </div>
+              <span style="font-size: 22px">🏆</span>
+            </div>
+          </div>
+
+          <!-- Interactive Stage -->
+          <div id="balloon-stage" class="balloon-stage">
+            <div class="stage-watermark">10</div>
+            <div
+              id="start-hint"
+              style="
+                position: absolute;
+                top: 12px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(15, 23, 42, 0.9);
+                border: 1px solid #facc15;
+                padding: 6px 16px;
+                border-radius: 20px;
+                font-family: &quot;Fredoka&quot;, cursive;
+                font-size: 12px;
+                color: #fde047;
+                pointer-events: none;
+                z-index: 20;
+              "
+            >
+              👉 ¡Toca o haz clic en los globos para reventarlos!
+            </div>
+          </div>
+
+          <!-- Bottom Controls -->
+          <div
+            class="game-bottom-controls"
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-top: 12px;
+              flex-wrap: wrap;
+              gap: 8px;
+            "
+          >
+            <div style="display: flex; gap: 8px">
+              <button class="btn-header" onclick="resetGameScore()">
+                <span>🔄</span> Reiniciar Puntos
+              </button>
+              <button
+                class="btn-header"
+                onclick="
+                  showCelebrationModal(
+                    '¡FELICIDADES AXXEL JHAEL!',
+                    '¡10 años llenos de amor, alegrías y bendiciones! Todos en tu familia estamos celebrando este día contigo. ¡Te queremos inmenso!',
+                  )
+                "
+              >
+                <span>🌟</span> Ver Mensaje Especial
+              </button>
+            </div>
+            <span style="font-size: 12px; color: #fde047"
+              >✨ ¡Globos dorados valen 50 pts!</span
+            >
+          </div>
+        </section>
+
+        <!-- ==========================================
+           TAB 3: PASTEL INTERACTIVO 10 AÑOS
+           ========================================== -->
+        <section id="tab-cake" class="tab-panel">
+          <div class="cake-container">
+            <div style="margin-bottom: 14px">
+              <div class="pill-decade">🎂 Tradición de los 10 Años</div>
+              <h3
+                style="
+                  font-family: &quot;Fredoka&quot;, cursive;
+                  font-size: 28px;
+                  color: #facc15;
+                  margin-top: 6px;
+                "
+              >
+                ¡El Pastel de Cumpleaños de Axxel!
+              </h3>
+              <p
+                id="cake-instruction"
+                style="
+                  font-size: 13px;
+                  color: #cbd5e1;
+                  max-width: 420px;
+                  margin: 4px auto 14px;
+                "
+              >
+                Toca cada una de las 10 velas o sopla para apagarlas y pedir tu
+                gran deseo de 10 años.
+              </p>
+            </div>
+
+            <div
+              style="
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                background: rgba(0, 0, 0, 0.5);
+                padding: 6px 14px;
+                border-radius: 20px;
+                border: 1px solid rgba(250, 204, 21, 0.3);
+                font-size: 13px;
+                color: #fde047;
+                margin-bottom: 24px;
+              "
+            >
+              <span>🔥 Velas encendidas: </span>
+              <strong id="candles-count-text">10 de 10</strong>
+            </div>
+
+            <!-- Cake & Candles Stage -->
+            <div
+              style="position: relative; max-width: 440px; margin: 0 auto 20px"
+            >
+              <!-- 10 Candles -->
+              <div id="candles-row" class="candles-row"></div>
+
+              <!-- Cake Tier 1 -->
+              <div class="cake-tier-1">⭐ AXXEL JHAEL ⭐</div>
+
+              <!-- Cake Tier 2 -->
+              <div class="cake-tier-2">
+                <div class="cake-badge-10">
+                  <div class="cake-badge-10-inner">
+                    10
+                    <span>AÑOS</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Cake Base Plate -->
+              <div class="cake-base-plate"></div>
+            </div>
+
+            <!-- Cake Actions -->
+            <div style="display: flex; justify-content: center; gap: 10px">
+              <button
+                id="btn-blow-all"
+                class="btn-open-card"
+                onclick="blowAllCandles()"
+              >
+                <span>💨</span> ¡Soplar las 10 Velas! 🎂
+              </button>
+              <button
+                id="btn-relight"
+                class="btn-action"
+                onclick="relightCandles()"
+                style="
+                  display: none;
+                  background: #facc15;
+                  color: #0f172a;
+                  font-weight: 800;
+                "
+              >
+                <span>🔥</span> Encender Velitas de Nuevo
+              </button>
+            </div>
+
+            <!-- Unlocked Birthday Wish Card -->
+            <div
+              id="wish-unlocked-card"
+              style="
+                display: none;
+                margin-top: 24px;
+                background: linear-gradient(
+                  135deg,
+                  rgba(88, 28, 135, 0.9),
+                  rgba(30, 27, 75, 0.9)
+                );
+                border: 2px solid #facc15;
+                border-radius: 24px;
+                padding: 20px;
+                text-align: left;
+                box-shadow: 0 0 30px rgba(250, 204, 21, 0.3);
+              "
+            >
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 10px;
+                  margin-bottom: 8px;
+                "
+              >
+                <span style="font-size: 30px">🌟</span>
+                <div>
+                  <h4
+                    style="
+                      font-family: &quot;Fredoka&quot;, cursive;
+                      font-size: 20px;
+                      color: #facc15;
+                    "
+                  >
+                    ¡Deseo Mágico Concedido para Axxel Jhael!
+                  </h4>
+                  <p style="font-size: 12px; color: #cbd5e1">
+                    Has apagado las 10 velas de tu primera década
+                  </p>
+                </div>
+              </div>
+              <p style="font-size: 14px; color: #f1f5f9; line-height: 1.6">
+                Que la felicidad, los abrazos sinceros, los nuevos aprendizajes
+                y la protección de Dios te acompañen en cada paso. Eres el
+                orgullo más grande de tu familia y hoy festejamos tus 10 años
+                por todo lo alto. ¡A disfrutar la torta y los regalos!
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+           TAB 4: ÁLBUM DE FOTOS (CARPETA fotos/)
+           ========================================== -->
+        <section id="tab-photos" class="tab-panel">
+          <div style="text-align: center; margin-bottom: 18px">
+            <div class="pill-decade">
+              📸 Galería de sus 10 Años (Carpeta fotos/)
+            </div>
+            <h3
+              style="
+                font-family: &quot;Fredoka&quot;, cursive;
+                font-size: 28px;
+                color: #facc15;
+                margin-top: 6px;
+              "
+            >
+              Álbum de Recuerdos de Axxel
+            </h3>
+            <p
+              style="
+                font-size: 13px;
+                color: #cbd5e1;
+                max-width: 500px;
+                margin: 4px auto;
+              "
+            >
+              Las fotos se cargan desde la carpeta <strong>fotos/</strong>.
+              ¡También puedes subir fotos nuevas directamente desde la cámara o
+              galería de tu celular!
+            </p>
+          </div>
+
+          <!-- Add Photo Bar -->
+          <div class="photo-upload-bar">
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <div>
+                <label
+                  style="
+                    display: block;
+                    font-size: 12px;
+                    font-weight: 800;
+                    color: #c084fc;
+                    text-transform: uppercase;
+                    margin-bottom: 4px;
+                  "
+                >
+                  Escribe un mensaje o pie de foto:
+                </label>
+                <input
+                  id="photo-caption-input"
+                  type="text"
+                  placeholder="Ej: Axxel abriendo regalos con sus abuelitos..."
+                  style="
+                    width: 100%;
+                    background: rgba(255, 255, 255, 0.08);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    border-radius: 12px;
+                    padding: 8px 12px;
+                    color: white;
+                    font-family: inherit;
+                    font-size: 14px;
+                  "
+                />
+              </div>
+
+              <div
+                style="
+                  display: flex;
+                  flex-wrap: wrap;
+                  justify-content: space-between;
+                  align-items: center;
+                  gap: 10px;
+                "
+              >
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                    flex-wrap: wrap;
+                  "
+                >
+                  <span
+                    style="font-size: 11px; color: #cbd5e1; font-weight: 700"
+                    >Sticker:</span
+                  >
+                  <select
+                    id="photo-sticker-select"
+                    style="
+                      background: #1e1b4b;
+                      border: 1px solid #facc15;
+                      color: #facc15;
+                      padding: 6px 10px;
+                      border-radius: 10px;
+                      font-family: &quot;Fredoka&quot;, cursive;
+                      font-size: 12px;
+                      font-weight: 700;
+                    "
+                  >
+                    <option value="🎉 10 AÑOS">🎉 10 AÑOS</option>
+                    <option value="👑 CAMPEÓN">👑 CAMPEÓN</option>
+                    <option value="⚽ CRACK">⚽ CRACK</option>
+                    <option value="❤️ FAMILIA">❤️ FAMILIA</option>
+                    <option value="🎂 PASTEL">🎂 PASTEL</option>
+                    <option value="🚀 GENIO">🚀 GENIO</option>
+                  </select>
+                </div>
+
+                <div>
+                  <input
+                    id="file-input-photo"
+                    type="file"
+                    accept="image/*"
+                    style="display: none"
+                    onchange="handlePhotoUpload(event)"
+                  />
+                  <button
+                    class="btn-action"
+                    style="
+                      background: linear-gradient(135deg, #ec4899, #8b5cf6);
+                      border: none;
+                      font-size: 13px;
+                    "
+                    onclick="
+                      document.getElementById('file-input-photo').click()
+                    "
+                  >
+                    <span>📷</span> Subir Foto a la Galería
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Polaroid Gallery (fotos/) -->
+          <div id="gallery-grid" class="gallery-grid"></div>
+
+          <div style="text-align: center; margin-top: 24px">
+            <button
+              style="
+                background: transparent;
+                border: none;
+                color: #a5b4fc;
+                text-decoration: underline;
+                font-size: 12px;
+                cursor: pointer;
+              "
+              onclick="restoreDefaultPhotos()"
+            >
+              Restaurar fotos de la carpeta fotos/
+            </button>
+          </div>
+        </section>
+      </main>
+
+      <!-- Footer -->
+      <footer>
+        <p
+          style="
+            font-family: &quot;Fredoka&quot;, cursive;
+            font-weight: 700;
+            color: #f472b6;
+            margin-bottom: 4px;
+          "
+        >
+          ❤️ Dedicado con amor infinito a Axxel Jhael en sus 10 años ❤️
+        </p>
+        <p style="font-size: 12px">
+          De tus abuelitos y toda tu familia. ¡Eres nuestro mayor orgullo!
+        </p>
+      </footer>
+    </div>
+
+    <!-- Congratulation Celebration Modal -->
+    <div
+      id="celebration-modal"
+      class="modal-overlay"
+      style="display: none"
+      onclick="closeCelebrationModal()"
+    >
+      <div class="modal-box" onclick="event.stopPropagation()">
+        <div style="font-size: 50px; margin-bottom: 8px">🏆</div>
+        <h3 id="modal-title">¡FELICIDADES AXXEL JHAEL!</h3>
+        <p id="modal-body">
+          ¡Has conseguido una puntuación récord en tus 10 años!
+        </p>
+        <button
+          class="btn-open-card"
+          style="margin: 0 auto"
+          onclick="closeCelebrationModal()"
+        >
+          <span>🎉</span> ¡Continuar la Fiesta!
+        </button>
+      </div>
+    </div>
+
+    <!-- iOS Install Guide Modal -->
+    <div
+      id="ios-install-modal"
+      class="modal-overlay"
+      style="display: none"
+      onclick="closeIOSModal()"
+    >
+      <div class="modal-box" onclick="event.stopPropagation()">
+        <div style="font-size: 40px; margin-bottom: 8px">📲</div>
+        <h3>Instalar en iPhone o iPad</h3>
+        <p style="text-align: left; font-size: 13px; line-height: 1.7">
+          1. Toca el botón <strong>Compartir (Share)</strong> en Safari.<br />
+          2. Desliza hacia abajo y selecciona
+          <strong>«Agregar al inicio» (Add to Home Screen)</strong>.<br />
+          3. ¡Listo! Tendrás la PWA de Axxel instalada en tu pantalla.
+        </p>
+        <button
+          class="btn-open-card"
+          style="margin: 0 auto"
+          onclick="closeIOSModal()"
+        >
+          ¡Entendido, gracias!
+        </button>
+      </div>
+    </div>
+
+    <!-- PWA Folder Structure & Downloads Modal -->
+    <div
+      id="folder-structure-modal"
+      class="modal-overlay"
+      style="display: none"
+      onclick="closeFolderStructureModal()"
+    >
+      <div
+        class="modal-box"
+        onclick="event.stopPropagation(); max-width: 540px; text-align: left;"
+      >
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            padding-bottom: 10px;
+            margin-bottom: 14px;
+          "
+        >
+          <h3 style="margin: 0; font-size: 20px">
+            📁 Carpeta para la PWA de Axxel
+          </h3>
+          <button
+            onclick="closeFolderStructureModal()"
+            style="
+              background: transparent;
+              border: none;
+              color: white;
+              font-size: 20px;
+              cursor: pointer;
+            "
+          >
+            ✕
+          </button>
+        </div>
+
+        <p style="font-size: 13px; color: #cbd5e1; margin-bottom: 12px">
+          Esta es exactamente la estructura creada en la carpeta
+          <strong>axxel-pwa/</strong>:
+        </p>
+
+        <pre
+          style="
+            background: rgba(0, 0, 0, 0.5);
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            color: #fde047;
+            font-family: monospace;
+            line-height: 1.45;
+            overflow-x: auto;
+            margin-bottom: 16px;
+          "
+        >
+axxel-pwa/
+├── index.html        (HTML con CSS y JS integrado)
+├── sw.js             (Service Worker para modo offline)
+├── manifest.json     (Configuración PWA instalable)
+├── musica/           (Música de fondo)
+│   ├── cumpleanos_feliz.mp3
+│   └── cumpleanos_feliz.wav
+├── fotos/            (Fotos de los 10 años)
+│   ├── foto1.jpg
+│   ├── foto2.jpg
+│   ├── foto3.jpg
+│   ├── foto4.jpg
+│   ├── foto5.jpg
+│   └── foto6.jpg
+└── iconos/
+    ├── pwa-192x192.png
+    └── pwa-512x512.png</pre
+        >
+
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <button
+            class="btn-action"
+            style="justify-content: center; background: #06b6d4"
+            onclick="downloadSingleFile('index.html')"
+          >
+            <span>📥</span> Descargar index.html
+          </button>
+          <button
+            class="btn-action"
+            style="justify-content: center; background: #8b5cf6"
+            onclick="downloadSingleFile('sw.js')"
+          >
+            <span>📥</span> Descargar sw.js
+          </button>
+          <button
+            class="btn-action"
+            style="justify-content: center; background: #ec4899"
+            onclick="downloadSingleFile('manifest.json')"
+          >
+            <span>📥</span> Descargar manifest.json
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lightbox Photo Viewer -->
+    <div
+      id="lightbox-modal"
+      class="modal-overlay"
+      style="display: none"
+      onclick="closeLightbox()"
+    >
+      <div
+        style="position: relative; max-width: 600px; width: 100%"
+        onclick="event.stopPropagation()"
+      >
+        <button
+          onclick="closeLightbox()"
+          style="
+            position: absolute;
+            top: -14px;
+            right: -14px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid white;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 10;
+          "
+        >
+          ✕
+        </button>
+        <div
+          style="
+            background: white;
+            padding: 12px 12px 20px;
+            border-radius: 18px;
+            text-align: center;
+            color: #0f172a;
+          "
+        >
+          <img
+            id="lightbox-img"
+            src=""
+            alt="Recuerdo de Axxel"
+            style="
+              max-height: 60vh;
+              width: 100%;
+              object-fit: contain;
+              border-radius: 12px;
+              background: #000;
+            "
+          />
+          <h4
+            id="lightbox-caption"
+            style="
+              font-family: &quot;Fredoka&quot;, cursive;
+              font-size: 16px;
+              margin-top: 12px;
+            "
+          ></h4>
+          <span
+            id="lightbox-sticker"
+            style="
+              display: inline-block;
+              background: #8b5cf6;
+              color: white;
+              padding: 3px 10px;
+              border-radius: 20px;
+              font-size: 11px;
+              font-weight: 800;
+              margin-top: 6px;
+            "
+          ></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+       JAVASCRIPT CODE - TODO EN ESTE ARCHIVO
+       ========================================================================== -->
+    <script>
+      /* --------------------------------------------------------------------------
+       1. BACKGROUND MUSIC & SOUND ENGINE (musica/ FOLDER + SYNTH FALLBACK)
+       -------------------------------------------------------------------------- */
+      let audioCtx = null;
+      let isMusicPlaying = false;
+      let musicSynthTimeoutId = null;
+      let isAudioMuted = false;
+      const bgAudioEl = document.getElementById("bg-audio-player");
+
+      function getAudioContext() {
+        if (!audioCtx) {
+          const AudioClass = window.AudioContext || window.webkitAudioContext;
+          audioCtx = new AudioClass();
+        }
+        if (audioCtx.state === "suspended") {
+          audioCtx.resume();
+        }
+        return audioCtx;
+      }
+
+      function triggerVibration(pattern) {
+        if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+          try {
+            navigator.vibrate(pattern);
+          } catch (e) {}
+        }
+      }
+
+      function playTone(
+        freq,
+        startTime,
+        duration,
+        type = "triangle",
+        gainLevel = 0.25,
+      ) {
+        if (isAudioMuted) return;
+        const ctx = getAudioContext();
+        try {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = type;
+          osc.frequency.setValueAtTime(freq, startTime);
+          gain.gain.setValueAtTime(0.001, startTime);
+          gain.gain.linearRampToValueAtTime(gainLevel, startTime + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(startTime);
+          osc.stop(startTime + duration);
+        } catch (e) {}
+      }
+
+      function playBalloonPopSound(pitchShift = 1) {
+        if (isAudioMuted) return;
+        const ctx = getAudioContext();
+        try {
+          const now = ctx.currentTime;
+          const bufferSize = ctx.sampleRate * 0.08;
+          const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+          const output = buffer.getChannelData(0);
+          for (let i = 0; i < bufferSize; i++) {
+            output[i] = Math.random() * 2 - 1;
+          }
+          const whiteNoise = ctx.createBufferSource();
+          whiteNoise.buffer = buffer;
+          const filter = ctx.createBiquadFilter();
+          filter.type = "lowpass";
+          filter.frequency.setValueAtTime(1400 * pitchShift, now);
+          filter.frequency.exponentialRampToValueAtTime(150, now + 0.08);
+          const noiseGain = ctx.createGain();
+          noiseGain.gain.setValueAtTime(0.6, now);
+          noiseGain.gain.exponentialRampToValueAtTime(0.01, now + 0.07);
+
+          whiteNoise.connect(filter);
+          filter.connect(noiseGain);
+          noiseGain.connect(ctx.destination);
+
+          const osc = ctx.createOscillator();
+          const thumpGain = ctx.createGain();
+          osc.type = "triangle";
+          osc.frequency.setValueAtTime(260 * pitchShift, now);
+          osc.frequency.exponentialRampToValueAtTime(45, now + 0.08);
+          thumpGain.gain.setValueAtTime(0.7, now);
+          thumpGain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
+
+          osc.connect(thumpGain);
+          thumpGain.connect(ctx.destination);
+
+          whiteNoise.start(now);
+          osc.start(now);
+          whiteNoise.stop(now + 0.08);
+          osc.stop(now + 0.08);
+        } catch (e) {}
+      }
+
+      function playGoldPopSound() {
+        playBalloonPopSound(1.4);
+        if (isAudioMuted) return;
+        const ctx = getAudioContext();
+        const notes = [523.25, 659.25, 783.99, 1046.5];
+        const now = ctx.currentTime;
+        notes.forEach((freq, idx) => {
+          playTone(freq, now + idx * 0.04, 0.35, "sine", 0.22);
+        });
+      }
+
+      function playFanfareSound() {
+        if (isAudioMuted) return;
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        const chords = [
+          { freq: 392.0, time: 0.0, dur: 0.12 },
+          { freq: 523.25, time: 0.14, dur: 0.12 },
+          { freq: 659.25, time: 0.28, dur: 0.12 },
+          { freq: 783.99, time: 0.42, dur: 0.35 },
+          { freq: 659.25, time: 0.8, dur: 0.14 },
+          { freq: 783.99, time: 0.96, dur: 0.14 },
+          { freq: 1046.5, time: 1.12, dur: 0.65 },
+        ];
+        chords.forEach(({ freq, time, dur }) => {
+          playTone(freq, now + time, dur, "triangle", 0.32);
+          playTone(freq * 1.5, now + time, dur * 0.8, "sine", 0.12);
+        });
+      }
+
+      function playCandleIgniteSound() {
+        if (isAudioMuted) return;
+        const ctx = getAudioContext();
+        try {
+          const now = ctx.currentTime;
+          // Pequeño chasquido y soplo cálido, como al acercar una llama a la mecha.
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(880, now);
+          osc.frequency.exponentialRampToValueAtTime(420, now + 0.11);
+          gain.gain.setValueAtTime(0.0001, now);
+          gain.gain.linearRampToValueAtTime(0.12, now + 0.012);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.16);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.17);
+        } catch (e) {
+          console.warn("No fue posible reproducir el sonido de encendido:", e);
+        }
+      }
+
+      function playCandleBlowSound() {
+        if (isAudioMuted) return;
+        const ctx = getAudioContext();
+        try {
+          const now = ctx.currentTime;
+          const bufferSize = ctx.sampleRate * 0.35;
+          const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+          const data = buffer.getChannelData(0);
+          for (let i = 0; i < bufferSize; i++) {
+            data[i] = Math.random() * 2 - 1;
+          }
+          const noise = ctx.createBufferSource();
+          noise.buffer = buffer;
+          const filter = ctx.createBiquadFilter();
+          filter.type = "bandpass";
+          filter.frequency.setValueAtTime(600, now);
+          filter.frequency.exponentialRampToValueAtTime(180, now + 0.35);
+          filter.Q.setValueAtTime(1.5, now);
+          const gain = ctx.createGain();
+          gain.gain.setValueAtTime(0.01, now);
+          gain.gain.linearRampToValueAtTime(0.4, now + 0.06);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+          noise.connect(filter);
+          filter.connect(gain);
+          gain.connect(ctx.destination);
+          noise.start(now);
+          noise.stop(now + 0.35);
+        } catch (e) {}
+      }
+
+      // Happy birthday synth loop
+      function playBirthdaySongSynth() {
+        if (!isMusicPlaying || isAudioMuted) return;
+        const ctx = getAudioContext();
+        const now = ctx.currentTime + 0.05;
+        const tempo = 0.3;
+        const C4 = 261.63,
+          D4 = 293.66,
+          E4 = 329.63,
+          F4 = 349.23,
+          G4 = 392.0;
+        const A4 = 440.0,
+          B4 = 493.88,
+          C5 = 523.25,
+          D5 = 587.33,
+          E5 = 659.25;
+
+        const melody = [
+          [C4, 0.75, 0],
+          [C4, 0.25, 0.75],
+          [D4, 1.0, 1.0],
+          [C4, 1.0, 2.0],
+          [F4, 1.0, 3.0],
+          [E4, 2.0, 4.0],
+          [C4, 0.75, 6.0],
+          [C4, 0.25, 6.75],
+          [D4, 1.0, 7.0],
+          [C4, 1.0, 8.0],
+          [G4, 1.0, 9.0],
+          [F4, 2.0, 10.0],
+          [C4, 0.75, 12.0],
+          [C4, 0.25, 12.75],
+          [C5, 1.0, 13.0],
+          [A4, 1.0, 14.0],
+          [F4, 1.0, 15.0],
+          [E4, 1.0, 16.0],
+          [D4, 2.0, 17.0],
+          [B4, 0.75, 19.0],
+          [B4, 0.25, 19.75],
+          [A4, 1.0, 20.0],
+          [F4, 1.0, 21.0],
+          [G4, 1.0, 22.0],
+          [F4, 2.5, 23.0],
+        ];
+
+        melody.forEach(([freq, dur, beat]) => {
+          playTone(
+            freq,
+            now + beat * tempo,
+            dur * tempo * 0.95,
+            "triangle",
+            0.25,
+          );
+          playTone(
+            freq * 2,
+            now + beat * tempo,
+            dur * tempo * 0.4,
+            "sine",
+            0.08,
+          );
+        });
+
+        musicSynthTimeoutId = setTimeout(
+          () => {
+            if (isMusicPlaying) playBirthdaySongSynth();
+          },
+          26.5 * tempo * 1000,
+        );
+      }
+
+      // Estado visual sincronizado del reproductor.
+      function updateMusicButton() {
+        const btn = document.getElementById("btn-music");
+        const text = document.getElementById("music-text");
+        const eq = document.getElementById("eq-indicator");
+        if (!btn || !text || !eq) return;
+
+        btn.classList.toggle("btn-music-playing", isMusicPlaying);
+        text.textContent = isMusicPlaying ? "Música On" : "Música";
+        eq.style.display = isMusicPlaying ? "inline-flex" : "none";
+      }
+
+      // Inicia la canción real en la primera interacción del niño.
+      // Los navegadores bloquean el autoplay sin un gesto del usuario.
+      let firstInteractionMusicStarted = false;
+
+      function startBirthdayMusic() {
+        if (firstInteractionMusicStarted || isAudioMuted) return;
+        firstInteractionMusicStarted = true;
+        isMusicPlaying = true;
+        updateMusicButton();
+
+        if (bgAudioEl) {
+          bgAudioEl.volume = 0.65;
+          const playAttempt = bgAudioEl.play();
+          if (playAttempt && typeof playAttempt.catch === "function") {
+            playAttempt.catch(() => {
+              // Respaldo musical si el archivo no existe o el navegador no lo reproduce.
+              if (isMusicPlaying && !isAudioMuted) playBirthdaySongSynth();
+            });
+          }
+        } else {
+          playBirthdaySongSynth();
+        }
+      }
+
+      // Reintenta con el sintetizador si el archivo de música falla al cargar.
+      if (bgAudioEl) {
+        bgAudioEl.addEventListener("error", () => {
+          if (isMusicPlaying && !isAudioMuted && !musicSynthTimeoutId) {
+            playBirthdaySongSynth();
+          }
+        });
+      }
+
+      // El evento se ejecuta dentro del gesto real (tap/clic/teclado), por lo que
+      // funciona también en Safari iOS y navegadores móviles con bloqueo de autoplay.
+      function handleFirstUserInteraction() {
+        if (firstInteractionMusicStarted) return;
+        startBirthdayMusic();
+      }
+      document.addEventListener("pointerdown", handleFirstUserInteraction, {
+        capture: true,
+        passive: true,
+      });
+      document.addEventListener("keydown", handleFirstUserInteraction, {
+        capture: true,
+      });
+      document.addEventListener("touchstart", handleFirstUserInteraction, {
+        capture: true,
+        passive: true,
+      });
+
+      // El botón permite pausar y reanudar la música en cualquier momento.
+      function toggleFestiveMusic() {
+        triggerVibration(15);
+
+        if (isAudioMuted) {
+          isAudioMuted = false;
+          document.getElementById("sound-icon").textContent = "🔊";
+        }
+
+        if (!isMusicPlaying) {
+          firstInteractionMusicStarted = true;
+          isMusicPlaying = true;
+          updateMusicButton();
+
+          if (bgAudioEl) {
+            bgAudioEl.play().catch(() => {
+              if (isMusicPlaying && !isAudioMuted) playBirthdaySongSynth();
+            });
+          } else {
+            playBirthdaySongSynth();
+          }
+        } else {
+          isMusicPlaying = false;
+          updateMusicButton();
+          if (bgAudioEl) bgAudioEl.pause();
+          if (musicSynthTimeoutId) {
+            clearTimeout(musicSynthTimeoutId);
+            musicSynthTimeoutId = null;
+          }
+        }
+      }
+
+      function toggleMuteAudio() {
+        triggerVibration(15);
+        isAudioMuted = !isAudioMuted;
+        const icon = document.getElementById("sound-icon");
+        if (isAudioMuted) {
+          icon.textContent = "🔇";
+          if (isMusicPlaying) toggleFestiveMusic();
+        } else {
+          icon.textContent = "🔊";
+        }
+      }
+
+      /* --------------------------------------------------------------------------
+       2. CANVAS CONFETTI ENGINE
+       -------------------------------------------------------------------------- */
+      const canvas = document.getElementById("confetti-canvas");
+      const ctx = canvas.getContext("2d");
+      let confettiParticles = [];
+      let confettiAnimId = null;
+
+      function resizeConfettiCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      window.addEventListener("resize", resizeConfettiCanvas);
+      resizeConfettiCanvas();
+
+      class ConfettiPiece {
+        constructor(x, y) {
+          this.x = x !== undefined ? x : Math.random() * canvas.width;
+          this.y = y !== undefined ? y : Math.random() * canvas.height * 0.4;
+          this.size = Math.random() * 8 + 6;
+          this.color = [
+            "#FFE000",
+            "#FF2A85",
+            "#06B6D4",
+            "#8B5CF6",
+            "#10B981",
+            "#F59E0B",
+          ][Math.floor(Math.random() * 6)];
+          this.speedX = (Math.random() - 0.5) * 8;
+          this.speedY = Math.random() * -6 - 4;
+          this.gravity = 0.25;
+          this.rotation = Math.random() * 360;
+          this.rotationSpeed = (Math.random() - 0.5) * 12;
+          this.opacity = 1;
+          this.decay = Math.random() * 0.01 + 0.008;
+        }
+        update() {
+          this.speedY += this.gravity;
+          this.x += this.speedX;
+          this.y += this.speedY;
+          this.rotation += this.rotationSpeed;
+          this.opacity -= this.decay;
+        }
+        draw(c) {
+          c.save();
+          c.translate(this.x, this.y);
+          c.rotate((this.rotation * Math.PI) / 180);
+          c.fillStyle = this.color;
+          c.globalAlpha = Math.max(0, this.opacity);
+          c.fillRect(
+            -this.size / 2,
+            -this.size / 2,
+            this.size,
+            this.size * 0.6,
+          );
+          c.restore();
+        }
+      }
+
+      function renderConfetti() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = confettiParticles.length - 1; i >= 0; i--) {
+          const p = confettiParticles[i];
+          p.update();
+          p.draw(ctx);
+          if (p.opacity <= 0 || p.y > canvas.height + 20) {
+            confettiParticles.splice(i, 1);
+          }
+        }
+        if (confettiParticles.length > 0) {
+          confettiAnimId = requestAnimationFrame(renderConfetti);
+        } else {
+          confettiAnimId = null;
+        }
+      }
+
+      function launchConfettiBurst(originX, originY, count = 120) {
+        triggerVibration([25, 20, 25]);
+        const x = originX !== undefined ? originX : canvas.width / 2;
+        const y = originY !== undefined ? originY : canvas.height * 0.6;
+        for (let i = 0; i < count; i++) {
+          confettiParticles.push(new ConfettiPiece(x, y));
+        }
+        if (!confettiAnimId) renderConfetti();
+      }
+
+      setTimeout(() => {
+        launchConfettiBurst(canvas.width / 2, canvas.height * 0.5, 90);
+      }, 500);
+
+      /* --------------------------------------------------------------------------
+       3. NAVIGATION TABS
+       -------------------------------------------------------------------------- */
+      function switchTab(tabId) {
+        triggerVibration(10);
+        document
+          .querySelectorAll(".tab-panel")
+          .forEach((p) => p.classList.remove("active"));
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((b) => (b.className = "tab-btn"));
+
+        document.getElementById("tab-" + tabId).classList.add("active");
+        document
+          .getElementById("tab-nav-" + tabId)
+          .classList.add("active-" + tabId);
+
+        if (tabId === "game") initBalloonGameLoop();
+      }
+
+      /* --------------------------------------------------------------------------
+       4. TAB 1: TARJETA INTERACTIVA
+       -------------------------------------------------------------------------- */
+      let isCardOpen = false;
+
+      function toggleCard() {
+        triggerVibration([20, 15, 20]);
+        isCardOpen = !isCardOpen;
+        const card = document.getElementById("interactive-card");
+        if (isCardOpen) {
+          card.classList.add("is-open");
+          playFanfareSound();
+          launchConfettiBurst(canvas.width / 2, canvas.height * 0.5, 140);
+        } else {
+          card.classList.remove("is-open");
+        }
+      }
+
+      function shareGreetingCard() {
+        triggerVibration(15);
+        const sender = document.getElementById("sig-input").value;
+        const shareText = `🎈 ¡FELIZ CUMPLEAÑOS #10 AXXEL JHAEL! 🎈\n\nQue Dios y la vida te colmen de bendiciones, sonrisas, fútbol y momentos inolvidables en tu primera década.\n\nCon todo el amor de: ${sender}\n\n${window.location.href}`;
+
+        if (navigator.share) {
+          navigator
+            .share({
+              title: "¡Feliz Cumpleaños 10 Axxel Jhael!",
+              text: shareText,
+              url: window.location.href,
+            })
+            .catch(() => {});
+        } else {
+          navigator.clipboard.writeText(shareText);
+          alert("¡Dedicatoria copiada al portapapeles!");
+        }
+      }
+
+      /* --------------------------------------------------------------------------
+       5. TAB 2: JUEGO DE GLOBOS
+       -------------------------------------------------------------------------- */
+      let gameScore = 0;
+      let balloonsPopped = 0;
+      let gameCombo = 1;
+      let comboTimer = null;
+      let gameMode = "free";
+      let challengeTime = 45;
+      let challengeTimerId = null;
+      let highScore = parseInt(
+        localStorage.getItem("axxel_balloon_highscore") || "0",
+        10,
+      );
+      document.getElementById("game-highscore").textContent = highScore;
+
+      let balloons = [];
+      let balloonIdGen = 1;
+      let lastBalloonSpawn = 0;
+      let gameLoopRunning = false;
+
+      const BALLOON_PALETTES = [
+        {
+          bg: "linear-gradient(135deg, #ff2a85, #e11d48)",
+          border: "#f472b6",
+          type: "pink",
+          pts: 10,
+        },
+        {
+          bg: "linear-gradient(135deg, #06b6d4, #0284c7)",
+          border: "#38bdf8",
+          type: "cyan",
+          pts: 10,
+        },
+        {
+          bg: "linear-gradient(135deg, #10b981, #059669)",
+          border: "#6ee7b7",
+          type: "green",
+          pts: 10,
+        },
+        {
+          bg: "linear-gradient(135deg, #f59e0b, #d97706)",
+          border: "#fde047",
+          type: "yellow",
+          pts: 10,
+        },
+        {
+          bg: "linear-gradient(135deg, #8b5cf6, #6d28d9)",
+          border: "#c084fc",
+          type: "purple",
+          pts: 10,
+        },
+        {
+          bg: "linear-gradient(135deg, #f97316, #ea580c)",
+          border: "#fdba74",
+          type: "orange",
+          pts: 10,
+        },
+        {
+          bg: "linear-gradient(135deg, #facc15, #f59e0b)",
+          border: "#fef08a",
+          type: "gold10",
+          pts: 50,
+        },
+        {
+          bg: "linear-gradient(135deg, #ec4899, #8b5cf6, #06b6d4)",
+          border: "#ffffff",
+          type: "surprise",
+          pts: 25,
+        },
+      ];
+
+      const SURPRISE_TEXTS = [
+        "¡CAMPEÓN!",
+        "¡GENIO!",
+        "¡10 AÑOS!",
+        "¡TE AMAMOS!",
+        "¡CRACK!",
+        "¡GRANDE!",
+      ];
+
+      function setGameMode(mode) {
+        triggerVibration(15);
+        gameMode = mode;
+        document
+          .getElementById("btn-mode-free")
+          .classList.toggle("active", mode === "free");
+        document
+          .getElementById("btn-mode-challenge")
+          .classList.toggle("active", mode === "challenge");
+
+        const s3Lbl = document.getElementById("stat-3-lbl");
+        const s3Val = document.getElementById("stat-3-val");
+        const s3Icon = document.getElementById("stat-3-icon");
+
+        if (mode === "challenge") {
+          challengeTime = 45;
+          s3Lbl.textContent = "Tiempo";
+          s3Val.textContent = challengeTime + "s";
+          s3Val.style.color = "#f59e0b";
+          s3Icon.textContent = "⏳";
+          startChallengeTimer();
+        } else {
+          if (challengeTimerId) clearInterval(challengeTimerId);
+          s3Lbl.textContent = "Explotados";
+          s3Val.textContent = balloonsPopped;
+          s3Val.style.color = "#38bdf8";
+          s3Icon.textContent = "💥";
+        }
+      }
+
+      function startChallengeTimer() {
+        if (challengeTimerId) clearInterval(challengeTimerId);
+        challengeTimerId = setInterval(() => {
+          challengeTime--;
+          document.getElementById("stat-3-val").textContent =
+            challengeTime + "s";
+          if (challengeTime <= 0) {
+            clearInterval(challengeTimerId);
+            if (gameScore > highScore) {
+              highScore = gameScore;
+              localStorage.setItem("axxel_balloon_highscore", highScore);
+              document.getElementById("game-highscore").textContent = highScore;
+              showCelebrationModal(
+                "🏆 ¡NUEVO RÉCORD DE CUMPLEAÑOS! 🏆",
+                `¡Increíble Axxel Jhael! Lograste una puntuación récord de ${gameScore} puntos en tus 10 años. ¡Eres un auténtico campeón de la fiesta!`,
+              );
+            } else {
+              showCelebrationModal(
+                "🎉 ¡FIN DEL DESAFÍO! 🎉",
+                `¡Conseguiste ${gameScore} puntos y explotaste ${balloonsPopped} globos! Eres súper veloz. ¡Prueba otra vez para romper tu récord!`,
+              );
+            }
+          }
+        }, 1000);
+      }
+
+      function spawnBalloon() {
+        const stage = document.getElementById("balloon-stage");
+        if (!stage) return;
+        const stageW = stage.clientWidth;
+
+        const rand = Math.random();
+        let pal = BALLOON_PALETTES[Math.floor(Math.random() * 6)];
+        let surpriseWord = "";
+
+        if (rand < 0.16) {
+          pal = BALLOON_PALETTES[6]; // Gold 10
+        } else if (rand < 0.3) {
+          pal = BALLOON_PALETTES[7]; // Surprise
+          surpriseWord =
+            SURPRISE_TEXTS[Math.floor(Math.random() * SURPRISE_TEXTS.length)];
+        }
+
+        const size = pal.type === "gold10" ? 82 : 72 + Math.random() * 16;
+        const bObj = {
+          id: balloonIdGen++,
+          x: Math.max(
+            10,
+            Math.min(stageW - size - 10, Math.random() * (stageW - size)),
+          ),
+          y: -size - 10,
+          speed: 1.4 + Math.random() * 1.5,
+          size: size,
+          pal: pal,
+          surpriseWord: surpriseWord,
+          driftPhase: Math.random() * Math.PI * 2,
+          driftSpeed: 0.03 + Math.random() * 0.02,
+          el: null,
+        };
+
+        const el = document.createElement("div");
+        el.className = "balloon-elem";
+        el.style.width = size + "px";
+        el.style.height = size * 1.25 + "px";
+
+        const body = document.createElement("div");
+        body.className = "balloon-body";
+        body.style.background = pal.bg;
+        body.style.border = `2px solid ${pal.border}`;
+
+        const highlight = document.createElement("div");
+        highlight.className = "balloon-highlight";
+        body.appendChild(highlight);
+
+        if (pal.type === "gold10") {
+          const text10 = document.createElement("div");
+          text10.style.fontFamily = "'Bungee', cursive";
+          text10.style.fontSize = "20px";
+          text10.style.color = "#0f172a";
+          text10.style.lineHeight = "1";
+          text10.innerHTML =
+            '10<br><span style="font-size:8px; font-weight:900;">AÑOS</span>';
+          body.appendChild(text10);
+        } else if (pal.type === "surprise") {
+          const gift = document.createElement("div");
+          gift.textContent = "🎁";
+          gift.style.fontSize = "18px";
+          body.appendChild(gift);
+        }
+
+        const knot = document.createElement("div");
+        knot.className = "balloon-knot";
+        knot.style.background = pal.border;
+        body.appendChild(knot);
+
+        const string = document.createElement("div");
+        string.className = "balloon-string";
+        body.appendChild(string);
+
+        el.appendChild(body);
+
+        const onPop = (e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          popBalloon(bObj, e);
+        };
+        el.addEventListener("click", onPop);
+        el.addEventListener("touchstart", onPop, { passive: false });
+
+        stage.appendChild(el);
+        bObj.el = el;
+        balloons.push(bObj);
+      }
+
+      function popBalloon(bObj, event) {
+        triggerVibration(bObj.pal.type === "gold10" ? [30, 20, 40] : 20);
+
+        if (bObj.pal.type === "gold10") {
+          playGoldPopSound();
+        } else {
+          playBalloonPopSound(0.9 + Math.random() * 0.4);
+        }
+
+        gameCombo = Math.min(gameCombo + 1, 5);
+        document.getElementById("game-combo").textContent = "x" + gameCombo;
+        if (comboTimer) clearTimeout(comboTimer);
+        comboTimer = setTimeout(() => {
+          gameCombo = 1;
+          document.getElementById("game-combo").textContent = "x1";
+        }, 1800);
+
+        const pointsEarned = Math.round(
+          bObj.pal.pts * (1 + (gameCombo - 1) * 0.25),
+        );
+        gameScore += pointsEarned;
+        balloonsPopped++;
+
+        document.getElementById("game-score").textContent = gameScore;
+        if (gameMode === "free") {
+          document.getElementById("stat-3-val").textContent = balloonsPopped;
+        }
+
+        const stage = document.getElementById("balloon-stage");
+        const tag = document.createElement("div");
+        tag.className = "score-tag";
+        tag.style.left = bObj.x + "px";
+        tag.style.bottom = bObj.y + "px";
+        tag.style.color = bObj.pal.type === "gold10" ? "#facc15" : "#38bdf8";
+        tag.textContent = bObj.surpriseWord
+          ? `${bObj.surpriseWord} +${pointsEarned}`
+          : `+${pointsEarned}`;
+        stage.appendChild(tag);
+        setTimeout(() => tag.remove(), 850);
+
+        const rect = stage.getBoundingClientRect();
+        const clientX =
+          event.clientX ||
+          (event.touches && event.touches[0]
+            ? event.touches[0].clientX
+            : rect.left + bObj.x);
+        const clientY =
+          event.clientY ||
+          (event.touches && event.touches[0]
+            ? event.touches[0].clientY
+            : rect.bottom - bObj.y);
+        launchConfettiBurst(
+          clientX,
+          clientY,
+          bObj.pal.type === "gold10" ? 30 : 15,
+        );
+
+        if (
+          gameMode === "free" &&
+          gameScore >= 200 &&
+          gameScore - pointsEarned < 200
+        ) {
+          showCelebrationModal(
+            "⭐ ¡200 PUNTOS DE MAGIA! ⭐",
+            "¡Increíble Axxel Jhael! Has alcanzado 200 puntos. ¡Tus abuelitos te mandan 10 abrazos gigantes!",
+          );
+        }
+
+        if (bObj.el) bObj.el.remove();
+        balloons = balloons.filter((b) => b.id !== bObj.id);
+      }
+
+      function initBalloonGameLoop() {
+        if (gameLoopRunning) return;
+        gameLoopRunning = true;
+
+        function loop() {
+          const now = Date.now();
+          const stage = document.getElementById("balloon-stage");
+          if (
+            stage &&
+            document.getElementById("tab-game").classList.contains("active")
+          ) {
+            const stageH = stage.clientHeight;
+            if (now - lastBalloonSpawn > 800) {
+              spawnBalloon();
+              lastBalloonSpawn = now;
+            }
+
+            for (let i = balloons.length - 1; i >= 0; i--) {
+              const b = balloons[i];
+              b.y += b.speed;
+              b.driftPhase += b.driftSpeed;
+              const sway = Math.sin(b.driftPhase) * 15;
+
+              if (b.el) {
+                b.el.style.left = b.x + sway + "px";
+                b.el.style.bottom = b.y + "px";
+              }
+
+              if (b.y > stageH + 20) {
+                if (b.el) b.el.remove();
+                balloons.splice(i, 1);
+              }
+            }
+          }
+          requestAnimationFrame(loop);
+        }
+        requestAnimationFrame(loop);
+      }
+
+      function resetGameScore() {
+        triggerVibration(15);
+        gameScore = 0;
+        balloonsPopped = 0;
+        gameCombo = 1;
+        document.getElementById("game-score").textContent = "0";
+        document.getElementById("game-combo").textContent = "x1";
+        if (gameMode === "free") {
+          document.getElementById("stat-3-val").textContent = "0";
+        }
+        balloons.forEach((b) => {
+          if (b.el) b.el.remove();
+        });
+        balloons = [];
+      }
+
+      function showCelebrationModal(title, body) {
+        triggerVibration([40, 30, 50]);
+        playFanfareSound();
+        launchConfettiBurst(canvas.width / 2, canvas.height * 0.4, 150);
+        document.getElementById("modal-title").textContent = title;
+        document.getElementById("modal-body").textContent = body;
+        document.getElementById("celebration-modal").style.display = "flex";
+      }
+      function closeCelebrationModal() {
+        document.getElementById("celebration-modal").style.display = "none";
+      }
+
+      /* --------------------------------------------------------------------------
+       6. TAB 3: PASTEL 10 VELAS
+       -------------------------------------------------------------------------- */
+      let candlesLit = [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+      ];
+      let candleActionLock = false;
+      const CANDLE_COUNT = 10;
+
+      function updateCandleCounter() {
+        const litCount = candlesLit.filter(Boolean).length;
+        document.getElementById("candles-count-text").textContent =
+          `${litCount} de ${CANDLE_COUNT}`;
+        const allOff = litCount === 0;
+        document.getElementById("btn-blow-all").style.display = allOff
+          ? "none"
+          : "inline-flex";
+        document.getElementById("btn-relight").style.display = allOff
+          ? "inline-flex"
+          : "none";
+        document.getElementById("wish-unlocked-card").style.display = allOff
+          ? "block"
+          : "none";
+        document.getElementById("cake-instruction").textContent = allOff
+          ? "✨ ¡Tus 10 deseos han sido enviados al cielo! ✨"
+          : "Toca una vela para apagarla o vuelve a encenderla. ¡Pide tu gran deseo de 10 años!";
+      }
+
+      function renderCandles() {
+        const container = document.getElementById("candles-row");
+        container.innerHTML = "";
+
+        candlesLit.forEach((isLit, idx) => {
+          const u = document.createElement("button");
+          u.type = "button";
+          u.className = "candle-unit" + (isLit ? "" : " is-off");
+          u.title = `${isLit ? "Apagar" : "Encender"} vela #${idx + 1} de Axxel`;
+          u.setAttribute("aria-label", u.title);
+          u.setAttribute("aria-pressed", String(isLit));
+          u.onclick = () => toggleSingleCandle(idx);
+          u.innerHTML = `
+          ${isLit ? '<span class="candle-glow" aria-hidden="true"></span>' : ""}
+          <span class="candle-flame" aria-hidden="true"></span>
+          <span class="candle-smoke" aria-hidden="true"></span>
+          <span class="candle-stick" aria-hidden="true"></span>
+          <span class="candle-num">${idx + 1}</span>
+        `;
+          container.appendChild(u);
+        });
+        updateCandleCounter();
+      }
+
+      function toggleSingleCandle(idx) {
+        if (candleActionLock) return;
+        if (candlesLit[idx]) {
+          blowSingleCandle(idx);
+        } else {
+          lightSingleCandle(idx);
+        }
+      }
+
+      function blowSingleCandle(idx) {
+        if (!candlesLit[idx] || candleActionLock) return;
+        const candle = document.querySelectorAll(".candle-unit")[idx];
+        if (candle) candle.classList.add("is-blowing");
+        triggerVibration(20);
+        playCandleBlowSound();
+        window.setTimeout(() => {
+          candlesLit[idx] = false;
+          renderCandles();
+          if (candlesLit.every((c) => !c)) {
+            playFanfareSound();
+            launchConfettiBurst(canvas.width / 2, canvas.height * 0.4, 200);
+          }
+        }, 390);
+      }
+
+      function lightSingleCandle(idx) {
+        if (candlesLit[idx] || candleActionLock) return;
+        triggerVibration(15);
+        playCandleIgniteSound();
+        candlesLit[idx] = true;
+        renderCandles();
+        const candle = document.querySelectorAll(".candle-unit")[idx];
+        if (candle) candle.classList.add("is-lighting");
+      }
+
+      function blowAllCandles() {
+        if (candleActionLock || candlesLit.every((c) => !c)) return;
+        candleActionLock = true;
+        triggerVibration([40, 20, 50]);
+        playCandleBlowSound();
+        document.querySelectorAll(".candle-unit").forEach((candle, idx) => {
+          if (candlesLit[idx]) candle.classList.add("is-blowing");
+        });
+        window.setTimeout(() => {
+          candlesLit = candlesLit.map(() => false);
+          candleActionLock = false;
+          renderCandles();
+          playFanfareSound();
+          launchConfettiBurst(canvas.width / 2, canvas.height * 0.4, 200);
+        }, 430);
+      }
+
+      function relightCandles() {
+        if (candleActionLock || candlesLit.every(Boolean)) return;
+        candleActionLock = true;
+        triggerVibration([20, 30, 20]);
+        let idx = 0;
+        const lightNext = () => {
+          while (idx < CANDLE_COUNT && candlesLit[idx]) idx++;
+          if (idx >= CANDLE_COUNT) {
+            candleActionLock = false;
+            updateCandleCounter();
+            return;
+          }
+          const current = idx++;
+          candlesLit[current] = true;
+          renderCandles();
+          const candle = document.querySelectorAll(".candle-unit")[current];
+          if (candle) candle.classList.add("is-lighting");
+          playCandleIgniteSound();
+          window.setTimeout(lightNext, 145);
+        };
+        lightNext();
+      }
+
+      renderCandles();
+
+      /* --------------------------------------------------------------------------
+       7. TAB 4: ÁLBUM DE FOTOS (fotos/ CARPETA)
+       -------------------------------------------------------------------------- */
+      // Default photos located in the fotos/ folder
+
+      const DEFAULT_LOCAL_PHOTOS = [
+        {
+          id: "p1",
+          url: "fotos/1-axxel-jethson-pq-navidad.jpeg",
+          fallbackUrl: "img/foto-no-disponible.svg",
+          caption:
+            "La magia de la Navidad es aún más bonita cuando se comparte con quienes más queremos. 🎄",
+          sticker: "🎄 RECUERDOS",
+          date: "Navidad en familia",
+        },
+        {
+          id: "p2",
+          url: "fotos/2-en-familia-pqs.jpeg",
+          fallbackUrl: "img/foto-no-disponible.svg",
+          caption:
+            "La familia, ese regalo maravilloso que convierte cualquier momento en un recuerdo inolvidable. ❤️",
+          sticker: "❤️ MI FAMILIA",
+          date: "Juntos es mejor",
+        },
+        {
+          id: "p3",
+          url: "fotos/3-katha-jethson-axxel-pqs.jpeg",
+          fallbackUrl: "img/foto-no-disponible.svg",
+          caption:
+            "Entre hermanos, cada día trae una nueva aventura, una travesura y una historia que contar.",
+          sticker: "🥰 COMPLICIDAD",
+          date: "Aventuras compartidas",
+        },
+        {
+          id: "p4",
+          url: "fotos/4-santa-martha-nonita.jpeg",
+          fallbackUrl: "img/foto-no-disponible.svg",
+          caption:
+            "Los abrazos de la familia son esos tesoros que el tiempo nunca podrá borrar.",
+          sticker: "❤️ AMOR ETERNO",
+          date: "Amor de familia",
+        },
+        {
+          id: "p5",
+          url: "fotos/5-katha-jethson-axxel-pqs.jpeg",
+          fallbackUrl: "img/foto-no-disponible.svg",
+          caption:
+            "No hacen falta grandes planes cuando estamos juntos; cualquier instante puede convertirse en felicidad.",
+          sticker: "✨ MOMENTOS",
+          date: "Pequeñas grandes alegrías",
+        },
+        {
+          id: "p6",
+          url: "fotos/6-katha-jethson-axxel-pqs.jpeg",
+          fallbackUrl: "img/foto-no-disponible.svg",
+          caption:
+            "Crecer rodeado de cariño es descubrir que los mejores regalos no siempre vienen envueltos.",
+          sticker: "🎁 CARIÑO",
+          date: "Detalles que enamoran",
+        },
+        {
+          id: "p7",
+          url: "fotos/7-katha-jethson-axxel-pqs-jugando.jpeg",
+          fallbackUrl: "img/foto-no-disponible.svg",
+          caption:
+            "Jugar, reír y compartir... porque la infancia está hecha de momentos que merecen durar para siempre.",
+          sticker: "🎈 A DIVERTIRSE",
+          date: "Días de diversión",
+        },
+        {
+          id: "p8",
+          url: "fotos/8-katha-jethson-axxel-pqs-navidad.jpeg",
+          fallbackUrl: "img/foto-no-disponible.svg",
+          caption:
+            "Luces, sonrisas y el calor de estar juntos. Así se construyen las Navidades más bonitas.",
+          sticker: "🎄 NAVIDAD",
+          date: "Una época especial",
+        },
+        {
+          id: "p9",
+          url: "fotos/9-katha-jethson-axxel-pqs-navidad.jpeg",
+          fallbackUrl: "img/foto-no-disponible.svg",
+          caption:
+            "Los recuerdos más valiosos no se compran: se viven, se comparten y se guardan en el corazón.",
+          sticker: "💫 INOLVIDABLE",
+          date: "Recuerdos para siempre",
+        },
+        {
+          id: "p10",
+          url: "fotos/10-katha-jethson-axxel-pqs-pesebre.jpeg",
+          fallbackUrl: "img/foto-no-disponible.svg",
+          caption:
+            "La ilusión de la Navidad nos recuerda que las mayores bendiciones son las personas que tenemos cerca.",
+          sticker: "⭐ BENDICIONES",
+          date: "Navidad especial",
+        },
+        {
+          id: "p11",
+          url: "fotos/11-katha-jethson-axxel-pqs-pesebre.jpeg",
+          fallbackUrl: "img/foto-no-disponible.svg",
+          caption:
+            "Un recuerdo más para esa colección de momentos familiares que hacen tan bonita nuestra historia.",
+          sticker: "📸 PARA SIEMPRE",
+          date: "Nuestra historia",
+        },
+        {
+          id: "p12",
+          url: "fotos/12-katha-axxel-pqs-durmiendo-taffy-hachi.jpeg",
+          fallbackUrl: "img/foto-no-disponible.svg",
+          caption:
+            "Hasta los momentos de tranquilidad tienen su encanto cuando se comparten con nuestros compañeros de aventuras. 🐾",
+          sticker: "🐶 TERNURA",
+          date: "Dulces momentos",
+        },
+        {
+          id: "p13",
+          url: "fotos/13-katha-jethson-axxel-pqs-acuario.jpeg",
+          fallbackUrl: "img/foto-no-disponible.svg",
+          caption:
+            "Descubrir el mundo juntos hace que cada paseo se convierta en una aventura extraordinaria.",
+          sticker: "🐠 AVENTUREROS",
+          date: "Un paseo especial",
+        },
+        {
+          id: "p14",
+          url: "fotos/14-katha-jethson-axxel-pqs-batallon.jpeg",
+          fallbackUrl: "img/foto-no-disponible.svg",
+          caption:
+            "Nuevos lugares, nuevas experiencias y muchas historias que algún día volveremos a contar.",
+          sticker: "🚀 EXPLORADORES",
+          date: "Días de aventura",
+        },
+        {
+          id: "p15",
+          url: "fotos/15-katha-jethson-axxel-pqs-nona-batallon.jpeg",
+          fallbackUrl: "img/foto-no-disponible.svg",
+          caption:
+            "Hay personas que hacen especiales nuestros recuerdos; compartirlos con la familia es una de esas bendiciones.",
+          sticker: "💕 MOMENTOS JUNTOS",
+          date: "Con nuestra familia",
+        },
+        {
+          id: "p16",
+          url: "fotos/16-katha-jethson-axxel-pqs-regalos-peluches-navidad.jpeg",
+          fallbackUrl: "img/foto-no-disponible.svg",
+          caption:
+            "La emoción de una sorpresa, la ilusión de un regalo y la felicidad de compartirlo todo. 🎁",
+          sticker: "🎁 SORPRESAS",
+          date: "Alegría navideña",
+        },
+        {
+          id: "p17",
+          url: "fotos/17-katha-jethson-axxel-pqs-un-rato-de-diversion-papa.jpeg",
+          fallbackUrl: "img/foto-no-disponible.svg",
+          caption:
+            "Esos ratitos de diversión con papá se convierten en historias que siempre tendrán un lugar especial.",
+          sticker: "👨‍👦 CON PAPÁ",
+          date: "Tiempo de calidad",
+        },
+        {
+          id: "p18",
+          url: "fotos/18-katha-jethson-axxel-pqs-regalos-navidad.jpeg",
+          fallbackUrl: "img/foto-no-disponible.svg",
+          caption:
+            "La ilusión de abrir un regalo es bonita, pero compartir la felicidad con los nuestros lo es todavía más.",
+          sticker: "🎄 FELICIDAD",
+          date: "Sorpresas de Navidad",
+        },
+        {
+          id: "p19",
+          url: "fotos/19-katha-jethson-axxel-pqs-regalos-navidad-2.jpeg",
+          fallbackUrl: "img/foto-no-disponible.svg",
+          caption:
+            "Otro pedacito de nuestra historia, lleno de cariño, sonrisas y momentos que vale la pena recordar.",
+          sticker: "✨ RECUERDOS",
+          date: "Momentos inolvidables",
+        },
+        {
+          id: "p20",
+          url: "fotos/20-katha-jethson-axxel-pqs-nonita.jpeg",
+          fallbackUrl: "img/foto-no-disponible.svg",
+          caption:
+            "El amor de una nonita es un abrazo que acompaña toda la vida y se queda para siempre en el corazón. ❤️",
+          sticker: "👵 AMOR DE NONITA",
+          date: "Cariño infinito",
+        },
+        {
+          id: "p21",
+          url: "fotos/21-katha-jethson-axxel-pqs-gorras-rojas.jpeg",
+          fallbackUrl: "img/foto-no-disponible.svg",
+          caption:
+            "Con estilo propio y muchas ganas de disfrutar la vida. ¡Que nunca falten las sonrisas!",
+          sticker: "🧢 CON ACTITUD",
+          date: "Diversión en familia",
+        },
+        {
+          id: "p22",
+          url: "fotos/22-tafi-navidad.jpeg",
+          fallbackUrl: "img/foto-no-disponible.svg",
+          caption:
+            "Porque nuestras mascotas también son familia y llenan nuestros días de amor y compañía. 🐾",
+          sticker: "🐶 AMOR PELUDO",
+          date: "Un integrante especial",
+        },
+        {
+          id: "p23",
+          url: "fotos/23-axxel-jethson-pesebre.jpeg",
+          fallbackUrl: "img/foto-no-disponible.svg",
+          caption:
+            "Entre tradiciones, sonrisas y momentos compartidos, seguimos sumando recuerdos maravillosos.",
+          sticker: "⭐ TRADICIONES",
+          date: "Navidad en familia",
+        },
+        {
+          id: "p24",
+          url: "fotos/24-axxel-jethson-pq-acuario.jpeg",
+          fallbackUrl: "img/foto-no-disponible.svg",
+          caption:
+            "Una nueva aventura para descubrir que el mundo está lleno de cosas maravillosas por conocer.",
+          sticker: "🐠 NUEVAS AVENTURAS",
+          date: "Explorando juntos",
+        },
+        {
+          id: "p25",
+          url: "fotos/25-axxel-katha-durmiendo.jpeg",
+          fallbackUrl: "img/foto-no-disponible.svg",
+          caption:
+            "La complicidad entre hermanos también vive en esos momentos sencillos que nos sacan una sonrisa.",
+          sticker: "🥰 SIEMPRE JUNTOS",
+          date: "Ternura de hermanos",
+        },
+        {
+          id: "p26",
+          url: "fotos/26-cumple-11-katha-axxel-8.jpeg",
+          fallbackUrl: "img/foto-no-disponible.svg",
+          caption:
+            "Un cumpleaños compartido, muchas sonrisas y la felicidad de celebrar la vida rodeados de quienes nos quieren. 🎂",
+          sticker: "🎂 DÍA ESPECIAL",
+          date: "Cumpleaños en familia",
+        },
+        {
+          id: "p27",
+          url: "fotos/27-cumple-12-katha-axxel-9.jpeg",
+          fallbackUrl: "img/foto-no-disponible.svg",
+          caption:
+            "El tiempo pasa, los pequeños crecen y los recuerdos de cada cumpleaños se vuelven tesoros. ¡Qué bonito verte crecer, Axxel! ❤️",
+          sticker: "🎉 CRECIENDO FELIZ",
+          date: "Otro año de recuerdos",
+        },
+      ];
+
+      let photos = [];
+      try {
+        const saved = localStorage.getItem("axxel_birthday_photos_v2");
+        photos = saved ? JSON.parse(saved) : DEFAULT_LOCAL_PHOTOS;
+      } catch (e) {
+        photos = DEFAULT_LOCAL_PHOTOS;
+      }
+
+      function renderPhotoGallery() {
+        const container = document.getElementById("gallery-grid");
+        container.innerHTML = "";
+
+        photos.forEach((photo) => {
+          const card = document.createElement("div");
+          card.className = "polaroid-card";
+          card.onclick = () => openLightbox(photo);
+
+          card.innerHTML = `
+          <div class="tape-sticker"></div>
+          <div class="polaroid-img-wrap">
+            <span class="polaroid-sticker-badge">${photo.sticker || "🎉 10 AÑOS"}</span>
+            <img src="${photo.url}" onerror="if (this.src !== '${photo.fallbackUrl || ""}') this.src = '${photo.fallbackUrl || ""}';" alt="${photo.caption}" loading="lazy" />
+          </div>
+          <p class="polaroid-caption">${photo.caption}</p>
+          <div class="polaroid-meta">
+            <span>${photo.date || "Recuerdo"}</span>
+            <span style="color:#ec4899; font-weight:800;">★ Axxel 10 ★</span>
+          </div>
+        `;
+          container.appendChild(card);
+        });
+      }
+
+      function handlePhotoUpload(e) {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+
+        const caption =
+          document.getElementById("photo-caption-input").value.trim() ||
+          "¡Recuerdo inolvidable de los 10 años de Axxel Jhael!";
+        const sticker = document.getElementById("photo-sticker-select").value;
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const img = new Image();
+          img.onload = () => {
+            const canvasEl = document.createElement("canvas");
+            const maxDim = 900;
+            let w = img.width,
+              h = img.height;
+            if (w > maxDim || h > maxDim) {
+              if (w > h) {
+                h = Math.round((h * maxDim) / w);
+                w = maxDim;
+              } else {
+                w = Math.round((w * maxDim) / h);
+                h = maxDim;
+              }
+            }
+            canvasEl.width = w;
+            canvasEl.height = h;
+            const ctxEl = canvasEl.getContext("2d");
+            ctxEl.drawImage(img, 0, 0, w, h);
+            const dataUrl = canvasEl.toDataURL("image/jpeg", 0.85);
+
+            const newPhoto = {
+              id: "photo_" + Date.now(),
+              url: dataUrl,
+              caption: caption,
+              sticker: sticker,
+              date: new Date().toLocaleDateString("es-ES", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              }),
+            };
+
+            photos.unshift(newPhoto);
+            try {
+              localStorage.setItem(
+                "axxel_birthday_photos_v2",
+                JSON.stringify(photos),
+              );
+            } catch (err) {}
+
+            renderPhotoGallery();
+            document.getElementById("photo-caption-input").value = "";
+            launchConfettiBurst();
+          };
+          img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+
+      function restoreDefaultPhotos() {
+        if (
+          confirm(
+            "¿Quieres restaurar las fotos originales de la carpeta fotos/?",
+          )
+        ) {
+          photos = DEFAULT_LOCAL_PHOTOS;
+          localStorage.removeItem("axxel_birthday_photos_v2");
+          renderPhotoGallery();
+        }
+      }
+
+      function openLightbox(photo) {
+        triggerVibration(10);
+        document.getElementById("lightbox-img").src = photo.url;
+        document.getElementById("lightbox-caption").textContent = photo.caption;
+        document.getElementById("lightbox-sticker").textContent =
+          photo.sticker || "🎉 10 AÑOS";
+        document.getElementById("lightbox-modal").style.display = "flex";
+      }
+      function closeLightbox() {
+        document.getElementById("lightbox-modal").style.display = "none";
+      }
+      renderPhotoGallery();
+
+      /* --------------------------------------------------------------------------
+       8. PWA INSTALLATION
+       -------------------------------------------------------------------------- */
+      let deferredPWAEvent = null;
+      const isIOSDevice = /iphone|ipad|ipod/.test(
+        navigator.userAgent.toLowerCase(),
+      );
+      const isRunningStandalone =
+        window.matchMedia("(display-mode: standalone)").matches ||
+        window.navigator.standalone === true;
+
+      if (!isRunningStandalone) {
+        if (isIOSDevice) {
+          document.getElementById("btn-pwa-install").style.display =
+            "inline-flex";
+        }
+        window.addEventListener("beforeinstallprompt", (e) => {
+          e.preventDefault();
+          deferredPWAEvent = e;
+          document.getElementById("btn-pwa-install").style.display =
+            "inline-flex";
+        });
+      }
+
+      function triggerPWAInstall() {
+        triggerVibration(15);
+        if (deferredPWAEvent) {
+          deferredPWAEvent.prompt();
+          deferredPWAEvent.userChoice.then((choice) => {
+            if (choice.outcome === "accepted") {
+              document.getElementById("btn-pwa-install").style.display = "none";
+            }
+            deferredPWAEvent = null;
+          });
+        } else if (isIOSDevice) {
+          document.getElementById("ios-install-modal").style.display = "flex";
+        }
+      }
+      function closeIOSModal() {
+        document.getElementById("ios-install-modal").style.display = "none";
+      }
+
+      /* --------------------------------------------------------------------------
+       9. SERVICE WORKER REGISTRATION (OFFLINE SUPPORT)
+       -------------------------------------------------------------------------- */
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("sw.js")
+            .then((reg) => {
+              console.log("PWA Service Worker registered:", reg.scope);
+            })
+            .catch((err) => {
+              console.log("Service Worker registration note:", err);
+            });
+        });
+      }
+
+      /* --------------------------------------------------------------------------
+       10. PWA FOLDER MODAL & DOWNLOADS
+       -------------------------------------------------------------------------- */
+      function openFolderStructureModal() {
+        triggerVibration(10);
+        document.getElementById("folder-structure-modal").style.display =
+          "flex";
+      }
+      function closeFolderStructureModal() {
+        document.getElementById("folder-structure-modal").style.display =
+          "none";
+      }
+
+      function downloadSingleFile(filename) {
+        triggerVibration(15);
+        let content = "";
+        let mime = "text/plain";
+
+        if (filename === "index.html") {
+          content = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+          mime = "text/html";
+        } else if (filename === "manifest.json") {
+          content = JSON.stringify(
+            {
+              id: "./",
+              name: "¡Feliz Cumpleaños 10 Axxel Jhael!",
+              short_name: "Axxel 10",
+              description:
+                "Tarjeta interactiva, juego de globos, fotos y música para los 10 años de Axxel Jhael.",
+              start_url: "./index.html",
+              scope: "./",
+              display: "standalone",
+              orientation: "portrait-primary",
+              theme_color: "#8b5cf6",
+              background_color: "#0a0b16",
+              icons: [
+                {
+                  src: "pwa-192x192.png",
+                  sizes: "192x192",
+                  type: "image/png",
+                  purpose: "any",
+                },
+                {
+                  src: "pwa-512x512.png",
+                  sizes: "512x512",
+                  type: "image/png",
+                  purpose: "any",
+                },
+                {
+                  src: "pwa-maskable-512x512.png",
+                  sizes: "512x512",
+                  type: "image/png",
+                  purpose: "maskable",
+                },
+              ],
+            },
+            null,
+            2,
+          );
+          mime = "application/json";
+        } else if (filename === "sw.js") {
+          content = `// Service Worker for Axxel Jhael 10th Birthday PWA
+const CACHE_NAME = 'axxel10-birthday-v2';
+const ASSETS_TO_CACHE = [
+  './',
+  './index.html',
+  './manifest.json',
+  './sw.js',
+  './icon.svg',
+  './pwa-192x192.png',
+  './pwa-512x512.png',
+  './pwa-maskable-512x512.png',
+  './apple-touch-icon.png',
+  './musica/cumpleanos_feliz.mp3',
+  './fotos/foto1.jpg',
+  './fotos/foto2.jpg',
+  './fotos/foto3.jpg',
+  './fotos/foto4.jpg',
+  './fotos/foto5.jpg',
+  './fotos/foto6.jpg'
+];
+
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS_TO_CACHE)).then(() => self.skipWaiting())
+  );
+});
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((keys) => {
+      return Promise.all(
+        keys.map((key) => {
+          if (key !== CACHE_NAME) return caches.delete(key);
+        })
+      );
+    }).then(() => self.clients.claim())
+  );
+});
+
+self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') return;
+  event.respondWith(
+    caches.match(event.request).then((cachedResponse) => {
+      if (cachedResponse) return cachedResponse;
+      return fetch(event.request).then((networkResponse) => {
+        if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
+          return networkResponse;
+        }
+        const responseToCache = networkResponse.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseToCache));
+        return networkResponse;
+      }).catch(() => caches.match('./index.html'));
+    })
+  );
+});`;
+          mime = "application/javascript";
+        }
+
+        const blob = new Blob([content], { type: mime });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }
+    </script>
+  </body>
+</html>

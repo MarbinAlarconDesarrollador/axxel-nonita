@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF3366" />
+      <stop offset="50%" stop-color="#7928CA" />
+      <stop offset="100%" stop-color="#00D2FF" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE000" />
+      <stop offset="100%" stop-color="#799F0C" />
+    </linearGradient>
+    <linearGradient id="balloon1" x1="0%" y1="0%" x2="70%" y2="70%">
+      <stop offset="0%" stop-color="#FF99C8" />
+      <stop offset="100%" stop-color="#E0245E" />
+    </linearGradient>
+    <linearGradient id="balloon2" x1="0%" y1="0%" x2="70%" y2="70%">
+      <stop offset="0%" stop-color="#70E4EF" />
+      <stop offset="100%" stop-color="#0066FF" />
+    </linearGradient>
+    <linearGradient id="balloon3" x1="0%" y1="0%" x2="70%" y2="70%">
+      <stop offset="0%" stop-color="#FFF275" />
+      <stop offset="100%" stop-color="#FF8C00" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background rounded box -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)" />
+
+  <!-- Confetti sparkles -->
+  <circle cx="100" cy="110" r="10" fill="#FFF275" opacity="0.9" />
+  <circle cx="410" cy="130" r="12" fill="#FF99C8" opacity="0.9" />
+  <circle cx="80" cy="400" r="8" fill="#70E4EF" opacity="0.9" />
+  <circle cx="430" cy="390" r="10" fill="#FFF275" opacity="0.9" />
+  <path d="M 120 70 L 125 85 L 140 90 L 125 95 L 120 110 L 115 95 L 100 90 L 115 85 Z" fill="#FFFFFF" opacity="0.8" />
+  <path d="M 390 70 L 395 85 L 410 90 L 395 95 L 390 110 L 385 95 L 370 90 L 385 85 Z" fill="#FFF275" opacity="0.8" />
+
+  <!-- Left Balloon (Cyan/Blue) -->
+  <ellipse cx="170" cy="190" rx="65" ry="80" fill="url(#balloon2)" transform="rotate(-12 170 190)" filter="url(#glow)" />
+  <ellipse cx="150" cy="160" rx="14" ry="24" fill="#FFFFFF" opacity="0.5" transform="rotate(-15 150 160)" />
+  <polygon points="175,268 185,278 165,278" fill="#0066FF" />
+  <path d="M 175 278 Q 165 330 195 380" stroke="#FFFFFF" stroke-width="2.5" fill="none" opacity="0.6" />
+
+  <!-- Right Balloon (Orange/Gold) -->
+  <ellipse cx="340" cy="190" rx="65" ry="80" fill="url(#balloon3)" transform="rotate(12 340 190)" filter="url(#glow)" />
+  <ellipse cx="320" cy="160" rx="14" ry="24" fill="#FFFFFF" opacity="0.5" transform="rotate(10 320 160)" />
+  <polygon points="335,268 345,278 325,278" fill="#FF8C00" />
+  <path d="M 335 278 Q 345 330 315 380" stroke="#FFFFFF" stroke-width="2.5" fill="none" opacity="0.6" />
+
+  <!-- Center Balloon (Vibrant Pink/Red) -->
+  <ellipse cx="256" cy="155" rx="72" ry="90" fill="url(#balloon1)" filter="url(#glow)" />
+  <ellipse cx="232" cy="125" rx="16" ry="28" fill="#FFFFFF" opacity="0.5" />
+  <polygon points="256,242 268,255 244,255" fill="#E0245E" />
+  <path d="M 256 255 Q 260 320 256 385" stroke="#FFFFFF" stroke-width="3" fill="none" opacity="0.7" />
+
+  <!-- Birthday Cake & Number "10" Badge -->
+  <circle cx="256" cy="335" r="95" fill="#FFFFFF" opacity="0.95" filter="url(#glow)" />
+  <circle cx="256" cy="335" r="85" fill="#180B35" />
+
+  <!-- Giant "10" in gold -->
+  <text x="256" y="360" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="78" fill="#FFE000" text-anchor="middle" letter-spacing="-2">10</text>
+
+  <!-- Crown / Party Stars -->
+  <polygon points="256,232 263,248 280,248 266,258 271,274 256,264 241,274 246,258 232,248 249,248" fill="#FFE000" />
+  
+  <!-- Banner text: AXXEL JHAEL -->
+  <rect x="76" y="420" width="360" height="52" rx="26" fill="#FFE000" />
+  <text x="256" y="456" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="24" fill="#580E79" text-anchor="middle" letter-spacing="1.5">AXXEL JHAEL</text>
+</svg>
