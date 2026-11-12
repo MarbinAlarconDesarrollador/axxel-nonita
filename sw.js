@@ -1,5 +1,5 @@
 // Service Worker for Axxel Jhael 10th Birthday PWA
-const CACHE_NAME = 'axxel10-birthday-v2';
+const CACHE_NAME = 'axxel10-birthday-v3';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
